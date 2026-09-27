@@ -27,11 +27,11 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path package
           Copy-Item build/Release/e33tracker.exe package/
-          Compress-Archive -Path package/* -DestinationPath "MyProject-${{ github.ref_name }}-windows-x64.zip"
+          Compress-Archive -Path package/* -DestinationPath "e33tracker-${{ github.ref_name }}-windows-x64.zip"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: "MyProject-${{ github.ref_name }}-windows-x64.zip"
+          files: "e33tracker-${{ github.ref_name }}-windows-x64.zip"
           generate_release_notes: true
 

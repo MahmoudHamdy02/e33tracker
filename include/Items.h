@@ -628,5 +628,5 @@ struct Area
 };
 
 // NOTE: Doesn't include areas with just a music record
-const int NUM_AREAS = 52;
+const int NUM_AREAS = 51;
 extern const std::array<Area, NUM_AREAS> AREAS;
