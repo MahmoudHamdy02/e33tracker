@@ -38,6 +38,8 @@ Gestral Village: Yes
 
 - Only main and side areas are included, i.e. no continent items etc.
 - Areas with just a music record are not included
+- Pictos with several levels are only counted once; if you have a level 1 picto then an area with the same picto at level 20 will still count it as picked up
+- If an area contains a Manor Door which leads to an item, it will be tracker in the area itself, not 'The Manor'
 - NG+/ending-specific items are not included:
   - Gustave's Crimson uniform outfit, Bun & Renoir haircuts
   - 'Baguette' weapon
