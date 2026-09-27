@@ -339,7 +339,6 @@ enum Picto
 	PictoCount,
 };
 
-// TODO: gustave items: dont include ng+
 enum Outfit
 {
 	HaircutGustave_Baguette,
@@ -441,7 +440,7 @@ enum Outfit
 	HaircutVerso_Gestral,
 	HaircutVerso_Gustave,
 	HaircutVerso_Osquio,
-	HaircutVerso_Renoir,
+	// HaircutVerso_Renoir, // ng+
 	HaircutVerso_Samurai,
 	HaircutVerso_Simon,
 	HaircutVerso_Verso,
@@ -469,13 +468,13 @@ enum Outfit
 	OutfitGustave_Obscur,
 	OutfitGustave_Osquio,
 	OutfitGustave_Pure,
-	OutfitGustave_Renoir,
-	OutfitGustave_RenoirsSuit,
+	// OutfitGustave_Renoir, // ng+
+	// OutfitGustave_RenoirsSuit, // ng+
 	OutfitGustave_Sakapatate,
 	OutfitGustave_Swimsuit,
 	OutfitLune_Baguette,
 	OutfitLune_Chic,
-	OutfitLune_Civilian,
+	// OutfitLune_Civilian, // ng+
 	OutfitLune_Clea,
 	OutfitLune_Danseuse,
 	OutfitLune_Esquie,
@@ -509,7 +508,7 @@ enum Outfit
 	OutfitMaelle_Swimsuit,
 	OutfitSciel_Baguette,
 	OutfitSciel_Chic,
-	OutfitSciel_Civilian,
+	// OutfitSciel_Civilian, // ng+
 	OutfitSciel_Clea,
 	OutfitSciel_Danseuse,
 	OutfitSciel_Esquie,
@@ -535,8 +534,8 @@ enum Outfit
 	OutfitVerso_Osquio,
 	OutfitVerso_Pelerin,
 	OutfitVerso_Pure,
-	OutfitVerso_Renoir,
-	OutfitVerso_RenoirsSuit,
+	// OutfitVerso_Renoir, // ng+
+	// OutfitVerso_RenoirsSuit, // ng+
 	OutfitVerso_Sakapatate,
 	OutfitVerso_Simple,
 	OutfitVerso_Swimsuit1,

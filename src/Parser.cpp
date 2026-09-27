@@ -371,7 +371,7 @@ void parse(const char *file_path, Items &items)
 		else if (name == "FaceSciel_OldConcept") items.outfits[HaircutSciel_PlungingBob] = 1;
 		else if (name == "FaceVerso_Samourai") items.outfits[HaircutVerso_Samurai] = 1;
 		else if (name == "SkinMaelle_Alicia") items.outfits[OutfitMaelle_PaintedMe] = 1;
-		else if (name == "SkinGustave_MirrorRenoir") items.outfits[OutfitGustave_RenoirsSuit] = 1;
+		// else if (name == "SkinGustave_MirrorRenoir") items.outfits[OutfitGustave_RenoirsSuit] = 1;
 		else if (name == "SkinGustave_Pure") items.outfits[OutfitGustave_Pure] = 1;
 		else if (name == "SkinLune_Pure") items.outfits[OutfitLune_Pure] = 1;
 		else if (name == "SkinVerso_Pure") items.outfits[OutfitVerso_Pure] = 1;
@@ -382,7 +382,7 @@ void parse(const char *file_path, Items &items)
 		else if (name == "SkinGustave_LumiereSuit") items.outfits[OutfitGustave_LumiereSuit] = 1;
 		else if (name == "SkinVerso_Potatoe_Bag") items.outfits[OutfitVerso_Sakapatate] = 1;
 		else if (name == "SkinVerso_Pelerin") items.outfits[OutfitVerso_Pelerin] = 1;
-		else if (name == "SkinVerso_Mirror") items.outfits[OutfitVerso_RenoirsSuit] = 1;
+		// else if (name == "SkinVerso_Mirror") items.outfits[OutfitVerso_RenoirsSuit] = 1;
 		else if (name == "SkinLune_Sirene") items.outfits[OutfitLune_Sirene] = 1;
 		else if (name == "SkinSciel_Sirene") items.outfits[OutfitSciel_Sirene] = 1;
 		else if (name == "SkinGustave_Potatoe_Bag") items.outfits[OutfitGustave_Sakapatate] = 1;
@@ -464,15 +464,15 @@ void parse(const char *file_path, Items &items)
 		else if (name == "SkinLune_CivilianSkirt") items.outfits[OutfitLune_Skirt] = 1;
 		else if (name == "SkinSciel_CivilianSkirt") items.outfits[OutfitSciel_Skirt] = 1;
 		else if (name == "FaceMonoco_Bald") items.outfits[HaircutMonoco_Bald] = 1;
-		else if (name == "SkinGustave_RealRenoir") items.outfits[OutfitGustave_Renoir] = 1;
-		else if (name == "SkinVerso_RealRenoir") items.outfits[OutfitVerso_Renoir] = 1;
+		// else if (name == "SkinGustave_RealRenoir") items.outfits[OutfitGustave_Renoir] = 1;
+		// else if (name == "SkinVerso_RealRenoir") items.outfits[OutfitVerso_Renoir] = 1;
 		else if (name == "SkinVerso_Simple") items.outfits[OutfitVerso_Simple] = 1;
 		// else if (name == "SkinGustave_Default_Red") items.outfits[OutfitGustave_CrimsonUniform] = 1;
 		else if (name == "SkinMaelle_Lumiere") items.outfits[OutfitMaelle_Lumiere] = 1;
 		else if (name == "SkinGustave_Civil") items.outfits[OutfitGustave_Civilian] = 1;
 		else if (name == "SkinVerso_Civil") items.outfits[OutfitVerso_Civilian] = 1;
-		else if (name == "SkinSciel_Civil") items.outfits[OutfitSciel_Civilian] = 1;
-		else if (name == "SkinLune_Civil") items.outfits[OutfitLune_Civilian] = 1;
+		// else if (name == "SkinSciel_Civil") items.outfits[OutfitSciel_Civilian] = 1;
+		// else if (name == "SkinLune_Civil") items.outfits[OutfitLune_Civilian] = 1;
 		else if (name == "SkinGustave_FlowerSuit") items.outfits[OutfitGustave_FlowerSuit] = 1;
 		else if (name == "SkinVerso_FlowerSuit") items.outfits[OutfitVerso_FlowerSuit] = 1;
 		else if (name == "SkinLune_FlowerSuit") items.outfits[OutfitLune_FlowerSuit] = 1;
@@ -553,7 +553,7 @@ void parse(const char *file_path, Items &items)
 		else if (name == "FaceMonoco_Osquio") items.outfits[HaircutMonoco_Osquio] = 1;
 		else if (name == "FaceVerso_Baguette") items.outfits[HaircutVerso_Baguette] = 1;
 		else if (name == "FaceMonoco_Baguette") items.outfits[HaircutMonoco_Baguette] = 1;
-		else if (name == "FaceVerso_Renoir") items.outfits[HaircutVerso_Renoir] = 1;
+		// else if (name == "FaceVerso_Renoir") items.outfits[HaircutVerso_Renoir] = 1;
 		else if (name == "SkinGustave_Gommage") items.outfits[OutfitGustave_Gommage] = 1;
 		else if (name == "SkinLune_Gommage") items.outfits[OutfitLune_Gommage] = 1;
 		else if (name == "SkinSciel_Gommage") items.outfits[OutfitSciel_Gommage] = 1;
