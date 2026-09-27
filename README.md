@@ -12,10 +12,15 @@ Tracked items:
 
 First, you need to convert your `.sav` save file to `.json` using the [`uesave` tool](https://github.com/trumank/uesave).
 
-Then, run the tracker executable from a terminal and pass the file path of the `.json` file:
+In a terminal:
+```
+./uesave.exe to-json -i path/to/save/file.sav -o path/to/json/file.json
+```
+
+Then, run the tracker and pass the file path of the `.json` file:
 
 ```
-./e33tracker.exe path/to/file.json
+./e33tracker.exe path/to/json/file.json
 ```
 
 The output looks like this:
