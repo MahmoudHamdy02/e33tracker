@@ -15,18 +15,18 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(nlohmann_json)
 
-add_executable(my_app
+add_executable(e33tracker
     src/main.cpp
     src/Items.cpp
     src/Parser.cpp
 )
 
-target_include_directories(my_app
+target_include_directories(e33tracker
     PRIVATE
         ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(my_app
+target_link_libraries(e33tracker
     PRIVATE
         nlohmann_json::nlohmann_json
 )
