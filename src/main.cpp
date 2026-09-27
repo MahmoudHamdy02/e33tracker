@@ -18,11 +18,7 @@ void _print_item_counts(const Items& items)
 
 	int outfit_count = 0;
 	for (int i = 0; i < OutfitCount; i++)
-	{
 		outfit_count += items.outfits[i];
-		if (items.outfits[i] == 0)
-			std::cout << i << std::endl;
-	}
 	std::cout << "Outfits: " << outfit_count << "/" << OutfitCount << std::endl;
 
 	int journal_count = 0;

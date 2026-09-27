@@ -1,9 +1,10 @@
 #pragma once
 
 #include <array>
+#include <cstdint>
 #include <initializer_list>
 
-enum Weapon
+enum Weapon : uint32_t
 {
 	Abysseram,
 	Algueron,
@@ -124,7 +125,7 @@ enum Weapon
 	WeaponCount,
 };
 
-enum Picto
+enum Picto : uint32_t
 {
 	AcceleratingHeal,
 	AcceleratingLastStand,
@@ -339,7 +340,7 @@ enum Picto
 	PictoCount,
 };
 
-enum Outfit
+enum Outfit : uint32_t
 {
 	HaircutGustave_Baguette,
 	// HaircutGustave_Bun, // ng+
@@ -555,7 +556,7 @@ enum Outfit
 	OutfitCount,
 };
 
-enum Journal
+enum Journal : uint32_t
 {
 	Journal34,
 	Journal35,

@@ -3,8 +3,613 @@
 #include "Items.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <unordered_map>
 
 using json = nlohmann::json;
+
+const std::unordered_map<std::string, uint32_t> weapons =
+{
+	{"Abysseram", Abysseram},
+	{"Algueron", Algueron},
+	{"Angerim", Angerim},
+	{"Baguettaro", Baguettaro},
+	{"Sirenaro_1", Ballaro},
+	{"Chainebum", BarrierBreaker},
+	{"Battlum", Battlum},
+	{"Benisim", Benisim},
+	{"Betelim", Betelim},
+	{"Blizzon", Blizzon},
+	{"Blodam", Blodam},
+	{"VD_Lune_1", Bonbim},
+	{"Boucharo", Boucharo},
+	{"Bourgelon", Bourgelon},
+	{"Braselim", Braselim},
+	{"Brulerum", Brulerum},
+	{"Brumaro", Brumaro},
+	{"VD_Monoco_1", Cannaro},
+	{"Chaliso", Chalium},
+	{"Sirenum_2", Chantenum},
+	{"Chapelim", Chapelim},
+	{"Charnon", Charnon},
+	{"Chation", Chation},
+	{"Chevalam", Chevalam},
+	{"Sirenim_1", Choralim},
+	{"Chromaro", Chromaro},
+	{"Simonim", Cleim},
+	{"Clierum", Clierum},
+	{"Coldum", Coldum},
+	{"Sirenim_2", Colim},
+	{"Confuso", Confuso},
+	{"Moissoso", Contorso},
+	{"Coralim", Coralim},
+	{"Corderon", Corderon},
+	{"Corpeso", Corpeso},
+	{"Cruleram", Cruleram},
+	{"Cultam", Cultam},
+	{"Danseso", Danseso},
+	{"Delaram", Delaram},
+	{"Deminerim", Deminerim},
+	{"Demonam", Demonam},
+	{"Direton", Direton},
+	{"Sireso_2", Dreameso},
+	{"Dualim", Dualiso},
+	{"Duenum", Duenum},
+	{"Duollison", Duollison},
+	{"Elerim", Elerim},
+	{"VD_Maelle_2", Esqium},
+	{"VD_Monoco_2", Esquiaro},
+	{"VD_Lune_2", Esquim},
+	{"VD_Sciel_2", Esquion},
+	{"VD_Verso_2", Esquiso},
+	{"Facesum", Facesum},
+	{"Reacharo_2", Fragaro},
+	{"Garganon", Garganon},
+	{"Gaulteram", Gaulteram},
+	{"Gesam", Gesam},
+	{"Glaceso", Glaceso},
+	{"Glaisum", Glaisum},
+	{"Gobluson", Gobluson},
+	{"Grandaro", Grandaro},
+	{"Reacheron_1", Guleson},
+	{"Hevason", Hevasson},
+	{"Jarum", Jarum},
+	{"Joyaro", Joyaro},
+	{"Reacherim_1", Kralim},
+	{"Lanceram", Lanceram},
+	{"VD_Maelle_1", Licorum},
+	{"Lighterim", Lighterim},
+	{"Reacheso_2", Liteso},
+	{"Reacherim_2", Lithelim},
+	{"Reacheron_2", Litheson},
+	{"Reachum_1", Lithum},
+	{"Lunerim", Lunerim},
+	{"Lusteson", Lusteson},
+	{"Maellum", Maellum},
+	{"Sirenon_2", Martenon},
+	{"Medalum", Medalum},
+	{"Melarum", Melarum},
+	{"Minason", Minason},
+	{"Contorson", Moisson},
+	{"Monocaro", Monocaro},
+	{"Noahram", Noahram},
+	{"Nosaram", Nosaram},
+	{"Reacharo_1", Nusaro},
+	{"Painerim", Painerim},
+	{"Reachum_2", Plenum},
+	{"Potierim", Potierim},
+	{"Ramasson", Ramasson},
+	{"Rangeson", Rangeson},
+	{"Redalim", Redalim},
+	{"Sadon", Sadon},
+	{"Sakaram", Sakaram},
+	{"Saperim", Saperim},
+	{"Scaverim", Scaverim},
+	{"Scieleson", Scieleson},
+	{"Seashelum", Seashelum},
+	{"Seeram", Seeram},
+	{"Sekarum", Sekarum},
+	{"Sidaro", Sidaro},
+	{"Simoso", Simoso},
+	{"Sireso_1", Sireso},
+	{"Snowim", Snowim},
+	{"Stalum", Stalum},
+	{"VD_Sciel_1", Sucetton},
+	{"VD_Verso_1", Sucreso},
+	{"Reacheso_1", Tireso},
+	{"Sirenum_1", Tissenum},
+	{"Sirenon_1", Tisseron},
+	{"Trebuchim", Trebuchim},
+	{"Troubadum", Troubadim},
+	{"Sirenaro_2", Urnaro},
+	{"Veremum", Veremum},
+	{"Verleso", Verleso},
+	{"Volesterum", Volesterum},
+	{"Yeverum", Yeverum},
+};
+
+const std::unordered_map<std::string, uint32_t> pictos =
+{
+	{"DoubleAP", EnergyMaster},
+	{"AP+1TurnStart", EnergisingTurn},
+	{"AP+1Attack", EnergisingAttackI},
+	{"AP+1Parry", EnergisingParry},
+	{"Augmented1stStrike", AugmentedFirstStrike},
+	{"Survivor", Survivor},
+	{"AegisRevival", AegisRevival},
+	{"Recovery", Recovery},
+	{"CounterUpdragdeA", AugmentedCounterI},
+	{"CounterUpdragdeB", AugmentedCounterII},
+	{"CounterUpdragdeC", AugmentedCounterIII},
+	{"SecondChance", SecondChance},
+	{"FirstStrike", FirstStrike},
+	{"SoloFighter", SoloFighter},
+	{"Teamwork", Teamwork},
+	{"SweetKill", SweetKill},
+	{"AugmentedAttack", AugmentedAttack},
+	{"AttackLifesteal", AttackLifesteal},
+	{"AugmentedAim", AugmentedAim},
+	{"ComboAttack1", ComboAttackI},
+	{"HealingParry", HealingParry},
+	{"AutoPowerful", AutoPowerful},
+	{"AutoShell", AutoShell},
+	{"AutoRush", AutoRush},
+	{"AutoRegen", AutoRegen},
+	{"AntiBurn", AntiBurn},
+	{"AntiFrozen", AntiFreeze},
+	{"AntiStun", AntiStun},
+	{"Dodger", Dodger},
+	{"InitialAp+1A", EnergisingStartI},
+	{"InitialAp+1B", EnergisingStartII},
+	{"InitialAp+1C", EnergisingStartIII},
+	{"InitialAp+1D", EnergisingStartIV},
+	{"ManOfParry", PerilousParry},
+	{"Confident", Confident},
+	{"ReviveCheer", EnergisingRevive},
+	{"ReviveWithRegen", RejuvenatingRevive},
+	{"ReviveWithPower", PowerfulRevive},
+	{"Solidifying", Solidifying},
+	{"TheOne", TheOne},
+	{"BootyHunter", DeadEnergyII},
+	{"PiercingShot", PiercingShot},
+	{"HealingDeath", HealingDeath},
+	{"EnergyDeath", EnergisingDeath},
+	{"ShieldingDeath", ShieldingDeath},
+	{"ProtectingDeath", ProtectingDeath},
+	{"BurnAffinity", BurnAffinity},
+	{"InvertedAffinity", InvertedAffinity},
+	{"ExhaustAffinity", ExhaustingPower},
+	{"AutoDeath", AutoDeath},
+	{"LastStand", AtDeathsDoor},
+	{"Stand", FullStrength},
+	{"OverPowered", PaintedPower},
+	{"SosShell", SOSShell},
+	{"SosPower", SOSPower},
+	{"SosRush", SOSRush},
+	{"DoubleBurn", DoubleBurn},
+	{"HealingFire", HealingFire},
+	{"RewardingMark", RewardingMark},
+	{"DoubleMark", DoubleMark},
+	{"StunBoost", StunBoost},
+	{"Sniper", Sniper},
+	{"Energy", EnergisingAttackII},
+	{"Cheater", Cheater},
+	{"HealingCounter", HealingCounter},
+	{"PowerfulShield", PowerfulShield},
+	{"BaseShield", BaseShield},
+	{"InMediasRes", InMediasRes},
+	{"ShieldAffinity", ShieldAffinity},
+	{"CriticalMoment", CriticalMoment},
+	{"FasterThanStrong", FasterThanStrong},
+	{"Warming", WarmingUp},
+	{"Shortcut", Shortcut},
+	{"RandomDefense", RandomDefense},
+	{"GlassCanon", GlassCannon},
+	{"DefensiveMode", DefensiveMode},
+	{"GreaterPowerful", GreaterPowerful},
+	{"GreaterSpeed", GreaterRush},
+	{"GreaterShell", GreaterShell},
+	{"LastStandCritical", LastStandCritical},
+	{"ReviveParadox", ReviveParadox},
+	{"EffectiveHeal", EffectiveHeal},
+	{"SharedCare", SharedCare},
+	{"EnergizingHeal", EnergisingHeal},
+	{"PowerfulHeal", PowerfulHeal},
+	{"ProtectingHeal", ProtectingHeal},
+	{"AcceleratorHeal", AcceleratingHeal},
+	{"ConfidentFighter", ConfidentFighter},
+	{"HealingShare", HealingShare},
+	{"WeaknessGain", WeaknessGain},
+	{"DeadEnergy", DeadEnergyI},
+	{"EffectivSupport", EffectiveSupport},
+	{"VersatileHealer", EnergeticHealer},
+	{"BeneficialContamination", BeneficialContamination},
+	{"Roulette", Roulette},
+	{"Painter", Painter},
+	{"Immaculate", Immaculate},
+	{"Tainted", Tainted},
+	{"FirstOffensive", FirstOffensive},
+	{"ProRetreat", ProRetreat},
+	{"WeakeningMark", EnfeeblingMark},
+	{"BurningMark", BurningMark},
+	{"PowerfulMark", PowerfulMark},
+	{"HealingMark", HealingMark},
+	{"StayMarked", StayMarked},
+	{"FreeAimBurnShot", BurningShots},
+	{"FreeAimMarkingShot", MarkingShots},
+	{"FreeAimPowerful", PowerfulShots},
+	{"FreeAimShell", ProtectingShots},
+	{"FreeAimSpeed", AcceleratingShots},
+	{"FreeAimEnergy", EnergisingShots},
+	{"Versatile", Versatile},
+	{"PowerfulStrike", EmpoweringAttack},
+	{"ShellStrike", ProtectingAttack},
+	{"PowerlessStrike", EnfeeblingAttack},
+	{"DefenslessStrike", ExposingAttack},
+	{"ReinforcementParade", EmpoweringParry},
+	{"LastStandSpeed", AcceleratingLastStand},
+	{"LastStandPowerful", EmpoweringLastStand},
+	{"LastStandShell", ProtectingLastStand},
+	{"PowerOfPain", EnergisingPain},
+	{"JumpRecovery", EnergisingJump},
+	{"FullEnergyAttack", PoweredAttack},
+	{"ComboAttack2", ComboAttackII},
+	{"ComboAttack3", ComboAttackIII},
+	{"DeathBombPhysical", DeathBomb},
+	{"Breaker", Breaker},
+	{"SimpleBreaker", StaggeringAttack},
+	{"EnergyBreak", EnergisingBreak},
+	{"BreakMomentum", QuickBreak},
+	{"BreakingStrong", EmpoweringBreak},
+	{"StunEnergy", EnergisingStun},
+	{"HealingStun", HealingStun},
+	{"BurningBreak", BurningBreak},
+	{"CriticalBreak", CriticalStun},
+	{"BreakingCounter", BreakingCounter},
+	{"GradientBreak", GradientBreak},
+	{"BreakShot", BreakingShots},
+	{"GreatFireBreak", FuelingBreak},
+	{"GradientFighter", GradientFighter},
+	{"GradientEnergy", EnergisingGradient},
+	{"GradientStacker", ChargingAttack},
+	{"GradientBreaker", GradientBreaker},
+	{"GradientCounterCharge", ChargingCounter},
+	{"GradientWeakness", ChargingWeakness},
+	{"GradientMark", ChargingMark},
+	{"ReviveTintEnergy", ReviveTintEnergy},
+	{"HealingTintEnergy", HealingTintEnergy},
+	{"PowerfulTint", EmpoweringTint},
+	{"ShellTint", ProtectingTint},
+	{"ShieldingTint", ShieldingTint},
+	{"SpeedTint", AcceleratingTint},
+	{"CleansingTint", CleansingTint},
+	{"GradientTint", ChargingTint},
+	{"TimeTint", TimeTint},
+	{"APOnBurn", EnergisingBurn},
+	{"BreakDamageOnBurn", BreakingBurn},
+	{"CritChanceBurn", CriticalBurn},
+	{"BurningDeath", BurningDeath},
+	{"BurnDurationIncrease", LongerBurn},
+	{"BreakDamageOnCrit", CriticalBreak},
+	{"CritCHanceOnWeak", CriticalWeakness},
+	{"CritChanceOnDefenseless", CriticalVulnerability},
+	{"PowerDodgeCombo", EmpoweringDodge},
+	{"MarkOnBreak", MarkingBreak},
+	{"SlowOnBreak", SlowingBreak},
+	{"DefenselessOnBreak", ExposingBreak},
+	{"BreakSpecialist", BreakSpecialist},
+	{"BreakingDeath", BreakingDeath},
+	{"BreakDamageOnSlow", BreakingSlow},
+	{"LongerPowerful", LongerPowerful},
+	{"LongerShell", LongerShell},
+	{"LongerRush", LongerRush},
+	{"PowerfulOnShell", PowerfulOnShell},
+	{"RushOnPowerful", RushOnPowerful},
+	{"ShellOnRush", ShellOnRush},
+	{"HealOnBuff", HealingBoon},
+	{"APOnPowerful", EnergisingPowerful},
+	{"APOnShell", EnergisingShell},
+	{"APOnRush", EnergisingRush},
+	{"GreaterPowerless", GreaterPowerless},
+	{"GreaterDefenseless", GreaterDefenceless},
+	{"GreaterSlow", GreaterSlow},
+	{"AutoDispelEnergy", EnergisingCleanse},
+	{"DispelOnAPConsume", DrainingCleanse},
+	{"BreakingAttack", BreakingAttack},
+	{"GradientOnCrit", ChargingCritical},
+	{"GradientOnBurn", ChargingBurn},
+	{"GradientOnStun", ChargingStun},
+	{"GradientOnBuff", ChargingAlteration},
+	{"AntiBlight", AntiBlight},
+	{"AntiCharm", AntiCharm},
+	{"CleasLife", CleasLife},
+	{"SOSHealingTint", SOSHealingTint},
+	{"GradientParry", GradientParry},
+	{"GradientOvercharge", GradientOvercharge},
+	{"APDiscount", APDiscount},
+	{"ConsumingAttack", ConsumingAttack},
+	{"LongerBreak", LongerBreak},
+	{"Frenzy", Frenzy},
+	{"DoubleThird", DoubleThird},
+	{"SlowingAttack", SlowingAttack},
+	{"EmpoweredHealer", EmpoweredHealer},
+	{"DamageShare", DamageShare},
+	{"Feint", Feint},
+	{"TriggerHappy", TriggerHappy},
+	{"EmpoweringJumps", EmpoweringJumps},
+	{"AlternatingCritical", AlternatingCritical},
+	{"FirstLife", FirstLife},
+	{"CleasDeath", CleasDeath},
+};
+
+
+const std::unordered_map<std::string, uint32_t> outfits =
+{
+	{"SkinGustave_Default", OutfitGustave_Expedition},
+	{"SkinLune_Default", OutfitLune_Expedition},
+	{"SkinMaelle_Default", OutfitMaelle_Expedition},
+	{"SkinMonoco_Default", OutfitMonoco_Expedition},
+	{"SkinSciel_Default", OutfitSciel_Expedition},
+	{"SkinVerso_Default", OutfitVerso_Expedition},
+	{"FaceGustave_Default", HaircutGustave_Gustave},
+	{"FaceLune_Default", HaircutLune_Lune},
+	{"FaceMaelle_Default", HaircutMaelle_Maelle},
+	{"FaceSciel_Default", HaircutSciel_Sciel},
+	{"FaceVerso_Default", HaircutVerso_Verso},
+	{"FaceLune_Braid", HaircutLune_Braid},
+	{"FaceMaelle_DoubleBraid", HaircutMaelle_DoubleBraid},
+	{"FaceMonoco_Default", HaircutMonoco_Monoco},
+	{"FaceMonoco_Viking", HaircutMonoco_Viking},
+	{"FaceGustave_Curly", HaircutGustave_Curly},
+	{"FaceGustave_Noah", HaircutGustave_Short},
+	{"FaceSciel_CurlyShort", HaircutSciel_ShortCurly},
+	{"FaceSciel_OldConcept", HaircutSciel_PlungingBob},
+	{"FaceVerso_Samourai", HaircutVerso_Samurai},
+	{"SkinMaelle_Alicia", OutfitMaelle_PaintedMe},
+	// {"SkinGustave_MirrorRenoir", OutfitGustave_RenoirsSuit},
+	{"SkinGustave_Pure", OutfitGustave_Pure},
+	{"SkinLune_Pure", OutfitLune_Pure},
+	{"SkinVerso_Pure", OutfitVerso_Pure},
+	{"SkinMonoco_Pure", OutfitMonoco_Pure},
+	{"SkinSciel_Pure", OutfitSciel_Pure},
+	{"SkinMaelle_Pure", OutfitMaelle_Pure},
+	{"FaceMonoco_Pure", HaircutMonoco_Pure},
+	{"SkinGustave_LumiereSuit", OutfitGustave_LumiereSuit},
+	{"SkinVerso_Potatoe_Bag", OutfitVerso_Sakapatate},
+	{"SkinVerso_Pelerin", OutfitVerso_Pelerin},
+	// {"SkinVerso_Mirror", OutfitVerso_RenoirsSuit},
+	{"SkinLune_Sirene", OutfitLune_Sirene},
+	{"SkinSciel_Sirene", OutfitSciel_Sirene},
+	{"SkinGustave_Potatoe_Bag", OutfitGustave_Sakapatate},
+	{"SkinLune_Potatoe_Bag", OutfitLune_Sakapatate},
+	{"SkinLune_Danseuse", OutfitLune_Danseuse},
+	{"SkinSciel_Potatoe_Bag", OutfitSciel_Sakapatate},
+	{"SkinSciel_Danseuse", OutfitSciel_Danseuse},
+	{"SkinMaelle_ActeIII", OutfitMaelle_RealMaelle},
+	{"SkinMaelle_Bikini", OutfitMaelle_Swimsuit},
+	{"SkinSciel_BikiniA", OutfitSciel_Swimsuit1},
+	{"SkinSciel_BikiniB", OutfitSciel_Swimsuit2},
+	{"SkinLune_BikiniA", OutfitLune_Swimsuit1},
+	{"SkinLune_BikiniB", OutfitLune_Swimsuit2},
+	{"SkinGustave_Bikini", OutfitGustave_Swimsuit},
+	{"SkinVerso_BikiniA", OutfitVerso_Swimsuit1},
+	{"SkinVerso_BikiniB", OutfitVerso_Swimsuit2},
+	{"FaceMaelle_ActeIII", HaircutMaelle_RealMaelle},
+	{"FaceMaelle_Voluminous", HaircutMaelle_Voluminous},
+	{"FaceMaelle_FrenchBob", HaircutMaelle_FrenchBob},
+	{"FaceMaelle_Rebellious", HaircutMaelle_Rebellious},
+	{"FaceMaelle_MessyBun", HaircutMaelle_MessyBun},
+	{"FaceMaelle_Short", HaircutMaelle_Short},
+	{"FaceMaelle_Gestral", HaircutMaelle_Gestral},
+	{"FaceSciel_Rebellious", HaircutSciel_Rebellious},
+	{"FaceSciel_Voluminous", HaircutSciel_Voluminous},
+	{"FaceSciel_Short", HaircutSciel_Short},
+	{"FaceSciel_Ponytail", HaircutSciel_Ponytail},
+	{"FaceSciel_Gestral", HaircutSciel_Gestral},
+	{"FaceSciel_DoubleBraid", HaircutSciel_DoubleBraid},
+	{"FaceLune_Frenchbob", HaircutLune_FrenchBob},
+	{"FaceLune_Gestral", HaircutLune_Gestral},
+	{"FaceLune_MessyBun", HaircutLune_MessyBun},
+	{"FaceLune_Ponytail", HaircutLune_Ponytail},
+	{"FaceLune_Sirene", HaircutLune_Sirene},
+	{"FaceLune_Voluminous", HaircutLune_Voluminous},
+	{"FaceVerso_bun", HaircutVerso_Bun},
+	{"FaceVerso_Gestral", HaircutVerso_Gestral},
+	{"FaceVerso_Handsome", HaircutVerso_Gustave},
+	{"FaceGustave_Gestral", HaircutGustave_Gestral},
+	// {"FaceGustave_Bun", HaircutGustave_Bun},
+	{"SkinMaelle_Potatoe_Bag", OutfitMaelle_Sakapatate},
+	{"SkinMonoco_Lumiere", OutfitMonoco_Lumiere},
+	{"SkinMonoco_Bikini", OutfitMonoco_Swimsuit},
+	{"SkinVerso_NoArmBand", OutfitVerso_Visages},
+	{"FaceSciel_Vintage", HaircutSciel_Vintage},
+	{"FaceSciel_FrenchBob", HaircutSciel_FrenchBob},
+	{"FaceSciel_Braid", HaircutSciel_Braid},
+	{"FaceSciel_Artist_s_One", HaircutSciel_Artist},
+	{"FaceVerso_Curly", HaircutVerso_Curly},
+	{"FaceMaelle_Artist_s_One", HaircutMaelle_Artist},
+	{"FaceMaelle_Braid", HaircutMaelle_Braid},
+	{"FaceMaelle_Vintage", HaircutMaelle_Vintage},
+	{"FaceLune_Artist_s_One", HaircutLune_Artist},
+	{"FaceLune_DoubleBraid", HaircutLune_DoubleBraid},
+	{"FaceLune_HalfPonytail", HaircutLune_HalfPonytail},
+	{"FaceLune_Short", HaircutLune_Short},
+	{"FaceLune_Wavy", HaircutLune_Wavy},
+	{"FaceGustave_Charming", HaircutGustave_Charming},
+	{"SkinLune_Clea", OutfitLune_Clea},
+	{"SkinMaelle_Clea", OutfitMaelle_Clea},
+	{"SkinSciel_Clea", OutfitSciel_Clea},
+	{"FaceLune_Default_WhiteVer", HaircutLune_RebelliousWhite},
+	{"FaceGustave_Default_WhiteVersion", HaircutGustave_ExpeditionWhite},
+	{"FaceSciel_Default_WhiteVersion", HaircutSciel_MessyBunWhite},
+	{"FaceVerso_Default_WhiteVersion", HaircutVerso_ExpeditionWhite},
+	{"FaceMaelle_Default_WhiteVersion", HaircutMaelle_PonytailWhite},
+	{"FaceMaelle_DoubleBraid_WhiteVersion", HaircutMaelle_DoubleBraidWhite},
+	{"FaceMaelle_Gestral_WhiteVersion", HaircutMaelle_GestralWhite},
+	{"FaceMaelle_Short_WhiteVersion", HaircutMaelle_ShortWhite},
+	{"FaceMaelle_Bald", HaircutMaelle_Bald},
+	{"FaceLune_Bald", HaircutLune_Bald},
+	{"FaceSciel_Bald", HaircutSciel_Bald},
+	{"FaceVerso_Bald", HaircutVerso_Bald},
+	{"FaceSciel_Clea", HaircutSciel_Clea},
+	{"FaceLune_Clea", HaircutLune_Clea},
+	{"FaceMaelle_Clea", HaircutMaelle_Clea},
+	{"FaceMaelle_Alicia", HaircutMaelle_PaintedMe},
+	{"SkinMaelle_CivilianSkirt", OutfitMaelle_Skirt},
+	{"SkinLune_CivilianSkirt", OutfitLune_Skirt},
+	{"SkinSciel_CivilianSkirt", OutfitSciel_Skirt},
+	{"FaceMonoco_Bald", HaircutMonoco_Bald},
+	// {"SkinGustave_RealRenoir", OutfitGustave_Renoir},
+	// {"SkinVerso_RealRenoir", OutfitVerso_Renoir},
+	{"SkinVerso_Simple", OutfitVerso_Simple},
+	// {"SkinGustave_Default_Red", OutfitGustave_CrimsonUniform},
+	{"SkinMaelle_Lumiere", OutfitMaelle_Lumiere},
+	{"SkinGustave_Civil", OutfitGustave_Civilian},
+	{"SkinVerso_Civil", OutfitVerso_Civilian},
+	// {"SkinSciel_Civil", OutfitSciel_Civilian},
+	// {"SkinLune_Civil", OutfitLune_Civilian},
+	{"SkinGustave_FlowerSuit", OutfitGustave_FlowerSuit},
+	{"SkinVerso_FlowerSuit", OutfitVerso_FlowerSuit},
+	{"SkinLune_FlowerSuit", OutfitLune_FlowerSuit},
+	{"SkinSciel_FlowerSuit", OutfitSciel_FlowerSuit},
+	{"SkinMaelle_FlowerSuit", OutfitMaelle_FlowerSuit},
+	{"SkinMonoco_FlowerSuit", OutfitMonoco_FlowerSuit},
+	{"SkinGustave_Obscur", OutfitGustave_Obscur},
+	{"SkinVerso_Obscur", OutfitVerso_Obscur},
+	{"SkinMaelle_Obscur", OutfitMaelle_Obscur},
+	{"SkinMaelle_Clair", OutfitMaelle_Clair},
+	{"SkinVerso_Clair", OutfitVerso_Clair},
+	{"FaceGustave_Flowers", HaircutGustave_Flowers},
+	{"FaceVerso_Flowers", HaircutVerso_Flowers},
+	{"FaceMaelle_Flowers", HaircutMaelle_Flowers},
+	{"FaceSciel_Flowers", HaircutSciel_Flowers},
+	{"FaceMonoco_Flowers", HaircutMonoco_Flowers},
+	{"FaceLune_Flowers", HaircutLune_Flowers},
+	{"SkinVerso_Baguette", OutfitVerso_Baguette},
+	{"SkinGustave_Baguette", OutfitGustave_Baguette},
+	{"SkinMaelle_Baguette", OutfitMaelle_Baguette},
+	{"SkinLune_Baguette", OutfitLune_Baguette},
+	{"SkinSciel_Baguette", OutfitSciel_Baguette},
+	{"FaceGustave_Baguette", HaircutGustave_Baguette},
+	{"FaceVerso_Baguette", HaircutVerso_Baguette},
+	{"FaceMaelle_Baguette", HaircutMaelle_Baguette},
+	{"FaceSciel_Baguette", HaircutSciel_Baguette},
+	{"FaceLune_Baguette", HaircutLune_Baguette},
+	{"SkinSciel_Chic", OutfitSciel_Chic},
+	{"SkinLune_Chic", OutfitLune_Chic},
+	{"SkinMaelle_Chic", OutfitMaelle_Chic},
+	{"SkinVerso_Chic", OutfitVerso_Chic},
+	{"SkinGustave_Chic", OutfitGustave_Chic},
+	{"SkinMonoco_Chic", OutfitMonoco_Chic},
+	{"FaceMaelle_Chic", HaircutMaelle_Chic},
+	{"FaceVerso_Chic", HaircutVerso_Chic},
+	{"FaceMonoco_Chic", HaircutMonoco_Chic},
+	{"FaceGustave_Chic", HaircutGustave_Chic},
+	{"FaceSciel_DoubleBun_Long", HaircutSciel_LongDoubleBun},
+	{"FaceSciel_DoubleBun", HaircutSciel_DoubleBun},
+	{"FaceLune_DoubleBun_Long", HaircutLune_LongDoubleBun},
+	{"FaceLune_DoubleBun", HaircutLune_DoubleBun},
+	{"FaceMaelle_DoubleBun_Long", HaircutMaelle_LongDoubleBun},
+	{"FaceMaelle_DoubleBun", HaircutMaelle_DoubleBun},
+	{"FaceVerso_BunBraid", HaircutVerso_BunBraid},
+	{"FaceGustave_BunBraid", HaircutGustave_BunBraid},
+	{"FaceMonoco_FrenchBob", HaircutMonoco_FrenchBob},
+	{"FaceMonoco_DoubleBun", HaircutMonoco_DoubleBun},
+	{"FaceLune_Simon", HaircutLune_Simon},
+	{"FaceSciel_Simon", HaircutSciel_Simon},
+	{"FaceMaelle_Simon", HaircutMaelle_Simon},
+	{"FaceVerso_Simon", HaircutVerso_Simon},
+	{"FaceMonoco_Simon", HaircutMonoco_Simon},
+	{"SkinLune_Esquie", OutfitLune_Esquie},
+	{"SkinSciel_Esquie", OutfitSciel_Esquie},
+	{"SkinGustave_Esquie", OutfitGustave_Esquie},
+	{"SkinVerso_Esquie", OutfitVerso_Esquie},
+	{"SkinMaelle_Esquie", OutfitMaelle_Esquie},
+	{"SkinMonoco_Esquie", OutfitMonoco_Esquie},
+	{"SkinLune_Osquio", OutfitLune_Osquio},
+	{"SkinSciel_Osquio", OutfitSciel_Osquio},
+	{"SkinGustave_Osquio", OutfitGustave_Osquio},
+	{"SkinVerso_Osquio", OutfitVerso_Osquio},
+	{"SkinMaelle_Osquio", OutfitMaelle_Osquio},
+	{"SkinMonoco_Osquio", OutfitMonoco_Osquio},
+	{"SkinMonoco_Baguette", OutfitMonoco_Baguette},
+	{"SkinVerso_MaskKeeper", OutfitVerso_Visages},
+	{"FaceLune_Esquie", HaircutLune_Esquie},
+	{"FaceSciel_Esquie", HaircutSciel_Esquie},
+	{"FaceGustave_Esquie", HaircutGustave_Esquie},
+	{"FaceVerso_Esquie", HaircutVerso_Esquie},
+	{"FaceMaelle_Esquie", HaircutMaelle_Esquie},
+	{"FaceMonoco_Esquie", HaircutMonoco_Esquie},
+	{"FaceLune_Osquio", HaircutLune_Osquio},
+	{"FaceSciel_Osquio", HaircutSciel_Osquio},
+	{"FaceGustave_Osquio", HaircutGustave_Osquio},
+	{"FaceVerso_Osquio", HaircutVerso_Osquio},
+	{"FaceMaelle_Osquio", HaircutMaelle_Osquio},
+	{"FaceMonoco_Osquio", HaircutMonoco_Osquio},
+	{"FaceVerso_Baguette", HaircutVerso_Baguette},
+	{"FaceMonoco_Baguette", HaircutMonoco_Baguette},
+	// {"FaceVerso_Renoir", HaircutVerso_Renoir},
+	{"SkinGustave_Gommage", OutfitGustave_Gommage},
+	{"SkinLune_Gommage", OutfitLune_Gommage},
+	{"SkinSciel_Gommage", OutfitSciel_Gommage},
+	{"SkinMaelle_Gommage", OutfitMaelle_Gommage},
+	{"SkinVerso_Gommage", OutfitVerso_Gommage},
+	{"SkinMonoco_Gommage", OutfitMonoco_Gommage},
+	{"SkinMonoco_Civilian", OutfitMonoco_Civilian},
+	{"SkinMaelle_CivilianLumiere", OutfitMaelle_Civilian},
+};
+
+const std::unordered_map<std::string, uint32_t> journals =
+{
+	{"Journal_Exp34", Journal34},
+	{"Journal_Exp35", Journal35},
+	{"Journal_Exp36", Journal36},
+	{"Journal_Exp37", Journal37},
+	{"Journal_Exp38", Journal38},
+	{"Journal_Exp39", Journal39},
+	{"Journal_Exp40", Journal40},
+	{"Journal_Exp41", Journal41},
+	{"Journal_Exp42", Journal42},
+	{"Journal_Exp43", Journal43},
+	{"Journal_Exp44", Journal44},
+	{"Journal_Exp45", Journal45},
+	{"Journal_Exp46", Journal46},
+	{"Journal_Exp47", Journal47},
+	{"Journal_Exp48", Journal48},
+	{"Journal_Exp49", Journal49},
+	{"Journal_Exp50", Journal50},
+	{"Journal_Exp51", Journal51},
+	{"Journal_Exp52", Journal52},
+	{"Journal_Exp53", Journal53},
+	{"Journal_Exp54", Journal54},
+	{"Journal_Exp55", Journal55},
+	{"Journal_Exp56", Journal56},
+	{"Journal_Exp57", Journal57},
+	{"Journal_Exp58", Journal58},
+	{"Journal_Exp59", Journal59},
+	{"Journal_Exp60", Journal60},
+	{"Journal_Exp61", Journal61},
+	{"Journal_Exp62", Journal62},
+	{"Journal_Exp63", Journal63},
+	{"Journal_Exp64", Journal64},
+	{"Journal_Exp65", Journal65},
+	{"Journal_Exp66", Journal66},
+	{"Journal_Exp67", Journal67},
+	{"Journal_Exp68", Journal68},
+	{"Journal_Exp69", Journal69},
+	{"Journal_Exp70", Journal70},
+	{"Journal_Exp78", Journal78},
+	{"Journal_Exp81", Journal81},
+	{"Journal_Exp84", Journal84},
+	{"Journal_Aline", JournalAline},
+	{"Journal_Exp100B", JournalJulie},
+	{"Journal_RenoirManor", JournalRenoir},
+	{"Journal_Exp100A", JournalSimon},
+	{"Journal_OldLumiere", JournalSurvivor},
+	{"Journal_RenoirVisages", JournalUnknown1},
+	{"Journal_RenoirReacher", JournalUnknown2},
+	{"Journal_RenoirSirene", JournalUnknown3},
+	{"Journal_Verso", JournalVerso},
+};
 
 void parse(const char *file_path, Items &items)
 {
@@ -18,601 +623,16 @@ void parse(const char *file_path, Items &items)
 	{
 		i.value()["key"].get_to(name);
 
-		// ============================= Weapons =============================
-		if (name == "Abysseram") items.weapons[Abysseram] = 1;
-		else if (name == "Algueron") items.weapons[Algueron] = 1;
-		else if (name == "Angerim") items.weapons[Angerim] = 1;
-		else if (name == "Baguettaro") items.weapons[Baguettaro] = 1;
-		// NOTE: baguette weapon is not included
-		else if (name == "Sirenaro_1") items.weapons[Ballaro] = 1;
-		else if (name == "Chainebum") items.weapons[BarrierBreaker] = 1;
-		else if (name == "Battlum") items.weapons[Battlum] = 1;
-		else if (name == "Benisim") items.weapons[Benisim] = 1;
-		else if (name == "Betelim") items.weapons[Betelim] = 1;
-		else if (name == "Blizzon") items.weapons[Blizzon] = 1;
-		else if (name == "Blodam") items.weapons[Blodam] = 1;
-		else if (name == "VD_Lune_1") items.weapons[Bonbim] = 1;
-		else if (name == "Boucharo") items.weapons[Boucharo] = 1;
-		else if (name == "Bourgelon") items.weapons[Bourgelon] = 1;
-		else if (name == "Braselim") items.weapons[Braselim] = 1;
-		else if (name == "Brulerum") items.weapons[Brulerum] = 1;
-		else if (name == "Brumaro") items.weapons[Brumaro] = 1;
-		else if (name == "VD_Monoco_1") items.weapons[Cannaro] = 1;
-		else if (name == "Chaliso") items.weapons[Chalium] = 1;
-		else if (name == "Sirenum_2") items.weapons[Chantenum] = 1;
-		else if (name == "Chapelim") items.weapons[Chapelim] = 1;
-		else if (name == "Charnon") items.weapons[Charnon] = 1;
-		else if (name == "Chation") items.weapons[Chation] = 1;
-		else if (name == "Chevalam") items.weapons[Chevalam] = 1;
-		else if (name == "Sirenim_1") items.weapons[Choralim] = 1;
-		else if (name == "Chromaro") items.weapons[Chromaro] = 1;
-		else if (name == "Simonim") items.weapons[Cleim] = 1;
-		else if (name == "Clierum") items.weapons[Clierum] = 1;
-		else if (name == "Coldum") items.weapons[Coldum] = 1;
-		else if (name == "Sirenim_2") items.weapons[Colim] = 1;
-		else if (name == "Confuso") items.weapons[Confuso] = 1;
-		else if (name == "Moissoso") items.weapons[Contorso] = 1;
-		else if (name == "Coralim") items.weapons[Coralim] = 1;
-		else if (name == "Corderon") items.weapons[Corderon] = 1;
-		else if (name == "Corpeso") items.weapons[Corpeso] = 1;
-		else if (name == "Cruleram") items.weapons[Cruleram] = 1;
-		else if (name == "Cultam") items.weapons[Cultam] = 1;
-		else if (name == "Danseso") items.weapons[Danseso] = 1;
-		else if (name == "Delaram") items.weapons[Delaram] = 1;
-		else if (name == "Deminerim") items.weapons[Deminerim] = 1;
-		else if (name == "Demonam") items.weapons[Demonam] = 1;
-		else if (name == "Direton") items.weapons[Direton] = 1;
-		else if (name == "Sireso_2") items.weapons[Dreameso] = 1;
-		else if (name == "Dualim") items.weapons[Dualiso] = 1;
-		else if (name == "Duenum") items.weapons[Duenum] = 1;
-		else if (name == "Duollison") items.weapons[Duollison] = 1;
-		else if (name == "Elerim") items.weapons[Elerim] = 1;
-		else if (name == "VD_Maelle_2") items.weapons[Esqium] = 1;
-		else if (name == "VD_Monoco_2") items.weapons[Esquiaro] = 1;
-		else if (name == "VD_Lune_2") items.weapons[Esquim] = 1;
-		else if (name == "VD_Sciel_2") items.weapons[Esquion] = 1;
-		else if (name == "VD_Verso_2") items.weapons[Esquiso] = 1;
-		else if (name == "Facesum") items.weapons[Facesum] = 1;
-		else if (name == "Reacharo_2") items.weapons[Fragaro] = 1;
-		else if (name == "Garganon") items.weapons[Garganon] = 1;
-		else if (name == "Gaulteram") items.weapons[Gaulteram] = 1;
-		else if (name == "Gesam") items.weapons[Gesam] = 1;
-		else if (name == "Glaceso") items.weapons[Glaceso] = 1;
-		else if (name == "Glaisum") items.weapons[Glaisum] = 1;
-		else if (name == "Gobluson") items.weapons[Gobluson] = 1;
-		else if (name == "Grandaro") items.weapons[Grandaro] = 1;
-		else if (name == "Reacheron_1") items.weapons[Guleson] = 1;
-		else if (name == "Hevason") items.weapons[Hevasson] = 1;
-		else if (name == "Jarum") items.weapons[Jarum] = 1;
-		else if (name == "Joyaro") items.weapons[Joyaro] = 1;
-		else if (name == "Reacherim_1") items.weapons[Kralim] = 1;
-		else if (name == "Lanceram") items.weapons[Lanceram] = 1;
-		else if (name == "VD_Maelle_1") items.weapons[Licorum] = 1;
-		else if (name == "Lighterim") items.weapons[Lighterim] = 1;
-		else if (name == "Reacheso_2") items.weapons[Liteso] = 1;
-		else if (name == "Reacherim_2") items.weapons[Lithelim] = 1;
-		else if (name == "Reacheron_2") items.weapons[Litheson] = 1;
-		else if (name == "Reachum_1") items.weapons[Lithum] = 1;
-		else if (name == "Lunerim") items.weapons[Lunerim] = 1;
-		else if (name == "Lusteson") items.weapons[Lusteson] = 1;
-		else if (name == "Maellum") items.weapons[Maellum] = 1;
-		else if (name == "Sirenon_2") items.weapons[Martenon] = 1;
-		else if (name == "Medalum") items.weapons[Medalum] = 1;
-		else if (name == "Melarum") items.weapons[Melarum] = 1;
-		else if (name == "Minason") items.weapons[Minason] = 1;
-		else if (name == "Contorson") items.weapons[Moisson] = 1;
-		else if (name == "Monocaro") items.weapons[Monocaro] = 1;
-		else if (name == "Noahram") items.weapons[Noahram] = 1;
-		else if (name == "Nosaram") items.weapons[Nosaram] = 1;
-		else if (name == "Reacharo_1") items.weapons[Nusaro] = 1;
-		else if (name == "Painerim") items.weapons[Painerim] = 1;
-		else if (name == "Reachum_2") items.weapons[Plenum] = 1;
-		else if (name == "Potierim") items.weapons[Potierim] = 1;
-		else if (name == "Ramasson") items.weapons[Ramasson] = 1;
-		else if (name == "Rangeson") items.weapons[Rangeson] = 1;
-		else if (name == "Redalim") items.weapons[Redalim] = 1;
-		else if (name == "Sadon") items.weapons[Sadon] = 1;
-		else if (name == "Sakaram") items.weapons[Sakaram] = 1;
-		else if (name == "Saperim") items.weapons[Saperim] = 1;
-		else if (name == "Scaverim") items.weapons[Scaverim] = 1;
-		else if (name == "Scieleson") items.weapons[Scieleson] = 1;
-		else if (name == "Seashelum") items.weapons[Seashelum] = 1;
-		else if (name == "Seeram") items.weapons[Seeram] = 1;
-		else if (name == "Sekarum") items.weapons[Sekarum] = 1;
-		else if (name == "Sidaro") items.weapons[Sidaro] = 1;
-		else if (name == "Simoso") items.weapons[Simoso] = 1;
-		else if (name == "Sireso_1") items.weapons[Sireso] = 1;
-		else if (name == "Snowim") items.weapons[Snowim] = 1;
-		else if (name == "Stalum") items.weapons[Stalum] = 1;
-		else if (name == "VD_Sciel_1") items.weapons[Sucetton] = 1;
-		else if (name == "VD_Verso_1") items.weapons[Sucreso] = 1;
-		else if (name == "Reacheso_1") items.weapons[Tireso] = 1;
-		else if (name == "Sirenum_1") items.weapons[Tissenum] = 1;
-		else if (name == "Sirenon_1") items.weapons[Tisseron] = 1;
-		else if (name == "Trebuchim") items.weapons[Trebuchim] = 1;
-		else if (name == "Troubadum") items.weapons[Troubadim] = 1;
-		else if (name == "Sirenaro_2") items.weapons[Urnaro] = 1;
-		else if (name == "Veremum") items.weapons[Veremum] = 1;
-		else if (name == "Verleso") items.weapons[Verleso] = 1;
-		else if (name == "Volesterum") items.weapons[Volesterum] = 1;
-		else if (name == "Yeverum") items.weapons[Yeverum] = 1;
+		if (weapons.find(name) != weapons.end())
+			items.weapons[weapons.at(name)] = 1;
 
-		// ============================= Pictos =============================
-		else if (name == "DoubleAP") items.pictos[EnergyMaster] = 1;
-		else if (name == "AP+1TurnStart") items.pictos[EnergisingTurn] = 1;
-		else if (name == "AP+1Attack") items.pictos[EnergisingAttackI] = 1;
-		else if (name == "AP+1Parry") items.pictos[EnergisingParry] = 1;
-		else if (name == "Augmented1stStrike") items.pictos[AugmentedFirstStrike] = 1;
-		else if (name == "Survivor") items.pictos[Survivor]= 1;
-		else if (name == "AegisRevival") items.pictos[AegisRevival] = 1;
-		else if (name == "Recovery") items.pictos[Recovery]= 1;
-		else if (name == "CounterUpdragdeA") items.pictos[AugmentedCounterI] = 1;
-		else if (name == "CounterUpdragdeB") items.pictos[AugmentedCounterII] = 1;
-		else if (name == "CounterUpdragdeC") items.pictos[AugmentedCounterIII] = 1;
-		else if (name == "SecondChance") items.pictos[SecondChance] = 1;
-		else if (name == "FirstStrike") items.pictos[FirstStrike] = 1;
-		else if (name == "SoloFighter") items.pictos[SoloFighter] = 1;
-		else if (name == "Teamwork") items.pictos[Teamwork]= 1;
-		else if (name == "SweetKill") items.pictos[SweetKill] = 1;
-		else if (name == "AugmentedAttack") items.pictos[AugmentedAttack] = 1;
-		else if (name == "AttackLifesteal") items.pictos[AttackLifesteal] = 1;
-		else if (name == "AugmentedAim") items.pictos[AugmentedAim] = 1;
-		else if (name == "ComboAttack1") items.pictos[ComboAttackI] = 1;
-		else if (name == "HealingParry") items.pictos[HealingParry] = 1;
-		else if (name == "AutoPowerful") items.pictos[AutoPowerful] = 1;
-		else if (name == "AutoShell") items.pictos[AutoShell] = 1;
-		else if (name == "AutoRush") items.pictos[AutoRush] = 1;
-		else if (name == "AutoRegen") items.pictos[AutoRegen] = 1;
-		else if (name == "AntiBurn") items.pictos[AntiBurn]= 1;
-		else if (name == "AntiFrozen") items.pictos[AntiFreeze]= 1;
-		else if (name == "AntiStun") items.pictos[AntiStun]= 1;
-		else if (name == "Dodger") items.pictos[Dodger]= 1;
-		else if (name == "InitialAp+1A") items.pictos[EnergisingStartI] = 1;
-		else if (name == "InitialAp+1B") items.pictos[EnergisingStartII] = 1;
-		else if (name == "InitialAp+1C") items.pictos[EnergisingStartIII] = 1;
-		else if (name == "InitialAp+1D") items.pictos[EnergisingStartIV] = 1;
-		else if (name == "ManOfParry") items.pictos[PerilousParry] = 1;
-		else if (name == "Confident") items.pictos[Confident]= 1;
-		else if (name == "ReviveCheer") items.pictos[EnergisingRevive] = 1;
-		else if (name == "ReviveWithRegen") items.pictos[RejuvenatingRevive] = 1;
-		else if (name == "ReviveWithPower") items.pictos[PowerfulRevive] = 1;
-		else if (name == "Solidifying") items.pictos[Solidifying]= 1;
-		else if (name == "TheOne") items.pictos[TheOne] = 1;
-		else if (name == "BootyHunter") items.pictos[DeadEnergyII] = 1;
-		else if (name == "PiercingShot") items.pictos[PiercingShot] = 1;
-		else if (name == "HealingDeath") items.pictos[HealingDeath] = 1;
-		else if (name == "EnergyDeath") items.pictos[EnergisingDeath] = 1;
-		else if (name == "ShieldingDeath") items.pictos[ShieldingDeath] = 1;
-		else if (name == "ProtectingDeath") items.pictos[ProtectingDeath] = 1;
-		else if (name == "BurnAffinity") items.pictos[BurnAffinity] = 1;
-		else if (name == "InvertedAffinity") items.pictos[InvertedAffinity] = 1;
-		else if (name == "ExhaustAffinity") items.pictos[ExhaustingPower] = 1;
-		else if (name == "AutoDeath") items.pictos[AutoDeath] = 1;
-		else if (name == "LastStand") items.pictos[AtDeathsDoor] = 1;
-		else if (name == "Stand") items.pictos[FullStrength] = 1;
-		else if (name == "OverPowered") items.pictos[PaintedPower] = 1;
-		else if (name == "SosShell") items.pictos[SOSShell] = 1;
-		else if (name == "SosPower") items.pictos[SOSPower] = 1;
-		else if (name == "SosRush") items.pictos[SOSRush] = 1;
-		else if (name == "DoubleBurn") items.pictos[DoubleBurn] = 1;
-		else if (name == "HealingFire") items.pictos[HealingFire] = 1;
-		else if (name == "RewardingMark") items.pictos[RewardingMark] = 1;
-		else if (name == "DoubleMark") items.pictos[DoubleMark] = 1;
-		else if (name == "StunBoost") items.pictos[StunBoost] = 1;
-		else if (name == "Sniper") items.pictos[Sniper]= 1;
-		else if (name == "Energy") items.pictos[EnergisingAttackII] = 1;
-		else if (name == "Cheater") items.pictos[Cheater]= 1;
-		else if (name == "HealingCounter") items.pictos[HealingCounter] = 1;
-		else if (name == "PowerfulShield") items.pictos[PowerfulShield] = 1;
-		else if (name == "BaseShield") items.pictos[BaseShield] = 1;
-		else if (name == "InMediasRes") items.pictos[InMediasRes] = 1;
-		else if (name == "ShieldAffinity") items.pictos[ShieldAffinity] = 1;
-		else if (name == "CriticalMoment") items.pictos[CriticalMoment] = 1;
-		else if (name == "FasterThanStrong") items.pictos[FasterThanStrong] = 1;
-		else if (name == "Warming") items.pictos[WarmingUp] = 1;
-		else if (name == "Shortcut") items.pictos[Shortcut]= 1;
-		else if (name == "RandomDefense") items.pictos[RandomDefense] = 1;
-		else if (name == "GlassCanon") items.pictos[GlassCannon] = 1;
-		else if (name == "DefensiveMode") items.pictos[DefensiveMode] = 1;
-		else if (name == "GreaterPowerful") items.pictos[GreaterPowerful] = 1;
-		else if (name == "GreaterSpeed") items.pictos[GreaterRush] = 1;
-		else if (name == "GreaterShell") items.pictos[GreaterShell] = 1;
-		else if (name == "LastStandCritical") items.pictos[LastStandCritical] = 1;
-		else if (name == "ReviveParadox") items.pictos[ReviveParadox] = 1;
-		else if (name == "EffectiveHeal") items.pictos[EffectiveHeal] = 1;
-		else if (name == "SharedCare") items.pictos[SharedCare] = 1;
-		else if (name == "EnergizingHeal") items.pictos[EnergisingHeal] = 1;
-		else if (name == "PowerfulHeal") items.pictos[PowerfulHeal] = 1;
-		else if (name == "ProtectingHeal") items.pictos[ProtectingHeal] = 1;
-		else if (name == "AcceleratorHeal") items.pictos[AcceleratingHeal] = 1;
-		else if (name == "ConfidentFighter") items.pictos[ConfidentFighter] = 1;
-		else if (name == "HealingShare") items.pictos[HealingShare] = 1;
-		else if (name == "WeaknessGain") items.pictos[WeaknessGain] = 1;
-		else if (name == "DeadEnergy") items.pictos[DeadEnergyI] = 1;
-		else if (name == "EffectivSupport") items.pictos[EffectiveSupport] = 1;
-		else if (name == "VersatileHealer") items.pictos[EnergeticHealer] = 1;
-		else if (name == "BeneficialContamination") items.pictos[BeneficialContamination] = 1;
-		else if (name == "Roulette") items.pictos[Roulette]= 1;
-		else if (name == "Painter") items.pictos[Painter]= 1;
-		else if (name == "Immaculate") items.pictos[Immaculate]= 1;
-		else if (name == "Tainted") items.pictos[Tainted]= 1;
-		else if (name == "FirstOffensive") items.pictos[FirstOffensive] = 1;
-		else if (name == "ProRetreat") items.pictos[ProRetreat] = 1;
-		else if (name == "WeakeningMark") items.pictos[EnfeeblingMark] = 1;
-		else if (name == "BurningMark") items.pictos[BurningMark] = 1;
-		else if (name == "PowerfulMark") items.pictos[PowerfulMark] = 1;
-		else if (name == "HealingMark") items.pictos[HealingMark] = 1;
-		else if (name == "StayMarked") items.pictos[StayMarked] = 1;
-		else if (name == "FreeAimBurnShot") items.pictos[BurningShots] = 1;
-		else if (name == "FreeAimMarkingShot") items.pictos[MarkingShots] = 1;
-		else if (name == "FreeAimPowerful") items.pictos[PowerfulShots] = 1;
-		else if (name == "FreeAimShell") items.pictos[ProtectingShots] = 1;
-		else if (name == "FreeAimSpeed") items.pictos[AcceleratingShots] = 1;
-		else if (name == "FreeAimEnergy") items.pictos[EnergisingShots] = 1;
-		else if (name == "Versatile") items.pictos[Versatile]= 1;
-		else if (name == "PowerfulStrike") items.pictos[EmpoweringAttack] = 1;
-		else if (name == "ShellStrike") items.pictos[ProtectingAttack] = 1;
-		else if (name == "PowerlessStrike") items.pictos[EnfeeblingAttack] = 1;
-		else if (name == "DefenslessStrike") items.pictos[ExposingAttack] = 1;
-		else if (name == "ReinforcementParade") items.pictos[EmpoweringParry] = 1;
-		else if (name == "LastStandSpeed") items.pictos[AcceleratingLastStand] = 1;
-		else if (name == "LastStandPowerful") items.pictos[EmpoweringLastStand] = 1;
-		else if (name == "LastStandShell") items.pictos[ProtectingLastStand] = 1;
-		else if (name == "PowerOfPain") items.pictos[EnergisingPain] = 1;
-		else if (name == "JumpRecovery") items.pictos[EnergisingJump] = 1;
-		else if (name == "FullEnergyAttack") items.pictos[PoweredAttack] = 1;
-		else if (name == "ComboAttack2") items.pictos[ComboAttackII] = 1;
-		else if (name == "ComboAttack3") items.pictos[ComboAttackIII] = 1;
-		else if (name == "DeathBombPhysical") items.pictos[DeathBomb] = 1;
-		else if (name == "Breaker") items.pictos[Breaker]= 1;
-		else if (name == "SimpleBreaker") items.pictos[StaggeringAttack] = 1;
-		else if (name == "EnergyBreak") items.pictos[EnergisingBreak] = 1;
-		else if (name == "BreakMomentum") items.pictos[QuickBreak] = 1;
-		else if (name == "BreakingStrong") items.pictos[EmpoweringBreak] = 1;
-		else if (name == "StunEnergy") items.pictos[EnergisingStun] = 1;
-		else if (name == "HealingStun") items.pictos[HealingStun] = 1;
-		else if (name == "BurningBreak") items.pictos[BurningBreak] = 1;
-		else if (name == "CriticalBreak") items.pictos[CriticalStun] = 1;
-		else if (name == "BreakingCounter") items.pictos[BreakingCounter] = 1;
-		else if (name == "GradientBreak") items.pictos[GradientBreak] = 1;
-		else if (name == "BreakShot") items.pictos[BreakingShots] = 1;
-		else if (name == "GreatFireBreak") items.pictos[FuelingBreak] = 1;
-		else if (name == "GradientFighter") items.pictos[GradientFighter] = 1;
-		else if (name == "GradientEnergy") items.pictos[EnergisingGradient] = 1;
-		else if (name == "GradientStacker") items.pictos[ChargingAttack] = 1;
-		else if (name == "GradientBreaker") items.pictos[GradientBreaker] = 1;
-		else if (name == "GradientCounterCharge") items.pictos[ChargingCounter] = 1;
-		else if (name == "GradientWeakness") items.pictos[ChargingWeakness] = 1;
-		else if (name == "GradientMark") items.pictos[ChargingMark] = 1;
-		else if (name == "ReviveTintEnergy") items.pictos[ReviveTintEnergy] = 1;
-		else if (name == "HealingTintEnergy") items.pictos[HealingTintEnergy] = 1;
-		else if (name == "PowerfulTint") items.pictos[EmpoweringTint] = 1;
-		else if (name == "ShellTint") items.pictos[ProtectingTint] = 1;
-		else if (name == "ShieldingTint") items.pictos[ShieldingTint] = 1;
-		else if (name == "SpeedTint") items.pictos[AcceleratingTint] = 1;
-		else if (name == "CleansingTint") items.pictos[CleansingTint] = 1;
-		else if (name == "GradientTint") items.pictos[ChargingTint] = 1;
-		else if (name == "TimeTint") items.pictos[TimeTint] = 1;
-		else if (name == "APOnBurn") items.pictos[EnergisingBurn] = 1;
-		else if (name == "BreakDamageOnBurn") items.pictos[BreakingBurn] = 1;
-		else if (name == "CritChanceBurn") items.pictos[CriticalBurn] = 1;
-		else if (name == "BurningDeath") items.pictos[BurningDeath] = 1;
-		else if (name == "BurnDurationIncrease") items.pictos[LongerBurn] = 1;
-		else if (name == "BreakDamageOnCrit") items.pictos[CriticalBreak] = 1;
-		else if (name == "CritCHanceOnWeak") items.pictos[CriticalWeakness] = 1;
-		else if (name == "CritChanceOnDefenseless") items.pictos[CriticalVulnerability] = 1;
-		else if (name == "PowerDodgeCombo") items.pictos[EmpoweringDodge] = 1;
-		else if (name == "MarkOnBreak") items.pictos[MarkingBreak] = 1;
-		else if (name == "SlowOnBreak") items.pictos[SlowingBreak] = 1;
-		else if (name == "DefenselessOnBreak") items.pictos[ExposingBreak] = 1;
-		else if (name == "BreakSpecialist") items.pictos[BreakSpecialist] = 1;
-		else if (name == "BreakingDeath") items.pictos[BreakingDeath] = 1;
-		else if (name == "BreakDamageOnSlow") items.pictos[BreakingSlow] = 1;
-		else if (name == "LongerPowerful") items.pictos[LongerPowerful] = 1;
-		else if (name == "LongerShell") items.pictos[LongerShell] = 1;
-		else if (name == "LongerRush") items.pictos[LongerRush] = 1;
-		else if (name == "PowerfulOnShell") items.pictos[PowerfulOnShell] = 1;
-		else if (name == "RushOnPowerful") items.pictos[RushOnPowerful] = 1;
-		else if (name == "ShellOnRush") items.pictos[ShellOnRush] = 1;
-		else if (name == "HealOnBuff") items.pictos[HealingBoon] = 1;
-		else if (name == "APOnPowerful") items.pictos[EnergisingPowerful] = 1;
-		else if (name == "APOnShell") items.pictos[EnergisingShell] = 1;
-		else if (name == "APOnRush") items.pictos[EnergisingRush] = 1;
-		else if (name == "GreaterPowerless") items.pictos[GreaterPowerless] = 1;
-		else if (name == "GreaterDefenseless") items.pictos[GreaterDefenceless] = 1;
-		else if (name == "GreaterSlow") items.pictos[GreaterSlow] = 1;
-		else if (name == "AutoDispelEnergy") items.pictos[EnergisingCleanse] = 1;
-		else if (name == "DispelOnAPConsume") items.pictos[DrainingCleanse] = 1;
-		else if (name == "BreakingAttack") items.pictos[BreakingAttack] = 1;
-		else if (name == "GradientOnCrit") items.pictos[ChargingCritical] = 1;
-		else if (name == "GradientOnBurn") items.pictos[ChargingBurn] = 1;
-		else if (name == "GradientOnStun") items.pictos[ChargingStun] = 1;
-		else if (name == "GradientOnBuff") items.pictos[ChargingAlteration] = 1;
-		else if (name == "AntiBlight") items.pictos[AntiBlight]= 1;
-		else if (name == "AntiCharm") items.pictos[AntiCharm]= 1;
-		else if (name == "CleasLife") items.pictos[CleasLife] = 1;
-		else if (name == "SOSHealingTint") items.pictos[SOSHealingTint] = 1;
-		else if (name == "GradientParry") items.pictos[GradientParry] = 1;
-		else if (name == "GradientOvercharge") items.pictos[GradientOvercharge] = 1;
-		else if (name == "APDiscount") items.pictos[APDiscount] = 1;
-		else if (name == "ConsumingAttack") items.pictos[ConsumingAttack] = 1;
-		else if (name == "LongerBreak") items.pictos[LongerBreak] = 1;
-		else if (name == "Frenzy") items.pictos[Frenzy]= 1;
-		else if (name == "DoubleThird") items.pictos[DoubleThird] = 1;
-		else if (name == "SlowingAttack") items.pictos[SlowingAttack] = 1;
-		else if (name == "EmpoweredHealer") items.pictos[EmpoweredHealer] = 1;
-		else if (name == "DamageShare") items.pictos[DamageShare] = 1;
-		else if (name == "Feint") items.pictos[Feint]= 1;
-		else if (name == "TriggerHappy") items.pictos[TriggerHappy]= 1;
-		else if (name == "EmpoweringJumps") items.pictos[EmpoweringJumps] = 1;
-		else if (name == "AlternatingCritical") items.pictos[AlternatingCritical] = 1;
-		else if (name == "FirstLife") items.pictos[FirstLife] = 1;
-		else if (name == "CleasDeath") items.pictos[CleasDeath] = 1;
+		if (pictos.find(name) != pictos.end())
+			items.pictos[pictos.at(name)] = 1;
 
-		// ============================= Outfits =============================
-		else if (name == "SkinGustave_Default") items.outfits[OutfitGustave_Expedition] = 1;
-		else if (name == "SkinLune_Default") items.outfits[OutfitLune_Expedition] = 1;
-		else if (name == "SkinMaelle_Default") items.outfits[OutfitMaelle_Expedition] = 1;
-		else if (name == "SkinMonoco_Default") items.outfits[OutfitMonoco_Expedition] = 1;
-		else if (name == "SkinSciel_Default") items.outfits[OutfitSciel_Expedition] = 1;
-		else if (name == "SkinVerso_Default") items.outfits[OutfitVerso_Expedition] = 1;
-		else if (name == "FaceGustave_Default") items.outfits[HaircutGustave_Gustave] = 1;
-		else if (name == "FaceLune_Default") items.outfits[HaircutLune_Lune] = 1;
-		else if (name == "FaceMaelle_Default") items.outfits[HaircutMaelle_Maelle] = 1;
-		else if (name == "FaceSciel_Default") items.outfits[HaircutSciel_Sciel] = 1;
-		else if (name == "FaceVerso_Default") items.outfits[HaircutVerso_Verso] = 1;
-		else if (name == "FaceLune_Braid") items.outfits[HaircutLune_Braid] = 1;
-		else if (name == "FaceMaelle_DoubleBraid") items.outfits[HaircutMaelle_DoubleBraid] = 1;
-		else if (name == "FaceMonoco_Default") items.outfits[HaircutMonoco_Monoco] = 1;
-		else if (name == "FaceMonoco_Viking") items.outfits[HaircutMonoco_Viking] = 1;
-		else if (name == "FaceGustave_Curly") items.outfits[HaircutGustave_Curly] = 1;
-		else if (name == "FaceGustave_Noah") items.outfits[HaircutGustave_Short] = 1;
-		else if (name == "FaceSciel_CurlyShort") items.outfits[HaircutSciel_ShortCurly] = 1;
-		else if (name == "FaceSciel_OldConcept") items.outfits[HaircutSciel_PlungingBob] = 1;
-		else if (name == "FaceVerso_Samourai") items.outfits[HaircutVerso_Samurai] = 1;
-		else if (name == "SkinMaelle_Alicia") items.outfits[OutfitMaelle_PaintedMe] = 1;
-		// else if (name == "SkinGustave_MirrorRenoir") items.outfits[OutfitGustave_RenoirsSuit] = 1;
-		else if (name == "SkinGustave_Pure") items.outfits[OutfitGustave_Pure] = 1;
-		else if (name == "SkinLune_Pure") items.outfits[OutfitLune_Pure] = 1;
-		else if (name == "SkinVerso_Pure") items.outfits[OutfitVerso_Pure] = 1;
-		else if (name == "SkinMonoco_Pure") items.outfits[OutfitMonoco_Pure] = 1;
-		else if (name == "SkinSciel_Pure") items.outfits[OutfitSciel_Pure] = 1;
-		else if (name == "SkinMaelle_Pure") items.outfits[OutfitMaelle_Pure] = 1;
-		else if (name == "FaceMonoco_Pure") items.outfits[HaircutMonoco_Pure] = 1;
-		else if (name == "SkinGustave_LumiereSuit") items.outfits[OutfitGustave_LumiereSuit] = 1;
-		else if (name == "SkinVerso_Potatoe_Bag") items.outfits[OutfitVerso_Sakapatate] = 1;
-		else if (name == "SkinVerso_Pelerin") items.outfits[OutfitVerso_Pelerin] = 1;
-		// else if (name == "SkinVerso_Mirror") items.outfits[OutfitVerso_RenoirsSuit] = 1;
-		else if (name == "SkinLune_Sirene") items.outfits[OutfitLune_Sirene] = 1;
-		else if (name == "SkinSciel_Sirene") items.outfits[OutfitSciel_Sirene] = 1;
-		else if (name == "SkinGustave_Potatoe_Bag") items.outfits[OutfitGustave_Sakapatate] = 1;
-		else if (name == "SkinLune_Potatoe_Bag") items.outfits[OutfitLune_Sakapatate] = 1;
-		else if (name == "SkinLune_Danseuse") items.outfits[OutfitLune_Danseuse] = 1;
-		else if (name == "SkinSciel_Potatoe_Bag") items.outfits[OutfitSciel_Sakapatate] = 1;
-		else if (name == "SkinSciel_Danseuse") items.outfits[OutfitSciel_Danseuse] = 1;
-		else if (name == "SkinMaelle_ActeIII") items.outfits[OutfitMaelle_RealMaelle] = 1;
-		else if (name == "SkinMaelle_Bikini") items.outfits[OutfitMaelle_Swimsuit] = 1;
-		else if (name == "SkinSciel_BikiniA") items.outfits[OutfitSciel_Swimsuit1] = 1;
-		else if (name == "SkinSciel_BikiniB") items.outfits[OutfitSciel_Swimsuit2] = 1;
-		else if (name == "SkinLune_BikiniA") items.outfits[OutfitLune_Swimsuit1] = 1;
-		else if (name == "SkinLune_BikiniB") items.outfits[OutfitLune_Swimsuit2] = 1;
-		else if (name == "SkinGustave_Bikini") items.outfits[OutfitGustave_Swimsuit] = 1;
-		else if (name == "SkinVerso_BikiniA") items.outfits[OutfitVerso_Swimsuit1] = 1;
-		else if (name == "SkinVerso_BikiniB") items.outfits[OutfitVerso_Swimsuit2] = 1;
-		else if (name == "FaceMaelle_ActeIII") items.outfits[HaircutMaelle_RealMaelle] = 1;
-		else if (name == "FaceMaelle_Voluminous") items.outfits[HaircutMaelle_Voluminous] = 1;
-		else if (name == "FaceMaelle_FrenchBob") items.outfits[HaircutMaelle_FrenchBob] = 1;
-		else if (name == "FaceMaelle_Rebellious") items.outfits[HaircutMaelle_Rebellious] = 1;
-		else if (name == "FaceMaelle_MessyBun") items.outfits[HaircutMaelle_MessyBun] = 1;
-		else if (name == "FaceMaelle_Short") items.outfits[HaircutMaelle_Short] = 1;
-		else if (name == "FaceMaelle_Gestral") items.outfits[HaircutMaelle_Gestral] = 1;
-		else if (name == "FaceSciel_Rebellious") items.outfits[HaircutSciel_Rebellious] = 1;
-		else if (name == "FaceSciel_Voluminous") items.outfits[HaircutSciel_Voluminous] = 1;
-		else if (name == "FaceSciel_Short") items.outfits[HaircutSciel_Short] = 1;
-		else if (name == "FaceSciel_Ponytail") items.outfits[HaircutSciel_Ponytail] = 1;
-		else if (name == "FaceSciel_Gestral") items.outfits[HaircutSciel_Gestral] = 1;
-		else if (name == "FaceSciel_DoubleBraid") items.outfits[HaircutSciel_DoubleBraid] = 1;
-		else if (name == "FaceLune_Frenchbob") items.outfits[HaircutLune_FrenchBob] = 1;
-		else if (name == "FaceLune_Gestral") items.outfits[HaircutLune_Gestral] = 1;
-		else if (name == "FaceLune_MessyBun") items.outfits[HaircutLune_MessyBun] = 1;
-		else if (name == "FaceLune_Ponytail") items.outfits[HaircutLune_Ponytail] = 1;
-		else if (name == "FaceLune_Sirene") items.outfits[HaircutLune_Sirene] = 1;
-		else if (name == "FaceLune_Voluminous") items.outfits[HaircutLune_Voluminous] = 1;
-		else if (name == "FaceVerso_bun") items.outfits[HaircutVerso_Bun] = 1;
-		else if (name == "FaceVerso_Gestral") items.outfits[HaircutVerso_Gestral] = 1;
-		else if (name == "FaceVerso_Handsome") items.outfits[HaircutVerso_Gustave] = 1;
-		else if (name == "FaceGustave_Gestral") items.outfits[HaircutGustave_Gestral] = 1;
-		// else if (name == "FaceGustave_Bun") items.outfits[HaircutGustave_Bun] = 1;
-		else if (name == "SkinMaelle_Potatoe_Bag") items.outfits[OutfitMaelle_Sakapatate] = 1;
-		else if (name == "SkinMonoco_Lumiere") items.outfits[OutfitMonoco_Lumiere] = 1;
-		else if (name == "SkinMonoco_Bikini") items.outfits[OutfitMonoco_Swimsuit] = 1;
-		else if (name == "SkinVerso_NoArmBand") items.outfits[OutfitVerso_Visages] = 1;
-		else if (name == "FaceSciel_Vintage") items.outfits[HaircutSciel_Vintage] = 1;
-		else if (name == "FaceSciel_FrenchBob") items.outfits[HaircutSciel_FrenchBob] = 1;
-		else if (name == "FaceSciel_Braid") items.outfits[HaircutSciel_Braid] = 1;
-		else if (name == "FaceSciel_Artist_s_One") items.outfits[HaircutSciel_Artist] = 1;
-		else if (name == "FaceVerso_Curly") items.outfits[HaircutVerso_Curly] = 1;
-		else if (name == "FaceMaelle_Artist_s_One") items.outfits[HaircutMaelle_Artist] = 1;
-		else if (name == "FaceMaelle_Braid") items.outfits[HaircutMaelle_Braid] = 1;
-		else if (name == "FaceMaelle_Vintage") items.outfits[HaircutMaelle_Vintage] = 1;
-		else if (name == "FaceLune_Artist_s_One") items.outfits[HaircutLune_Artist] = 1;
-		else if (name == "FaceLune_DoubleBraid") items.outfits[HaircutLune_DoubleBraid] = 1;
-		else if (name == "FaceLune_HalfPonytail") items.outfits[HaircutLune_HalfPonytail] = 1;
-		else if (name == "FaceLune_Short") items.outfits[HaircutLune_Short] = 1;
-		else if (name == "FaceLune_Wavy") items.outfits[HaircutLune_Wavy] = 1;
-		else if (name == "FaceGustave_Charming") items.outfits[HaircutGustave_Charming] = 1;
-		else if (name == "SkinLune_Clea") items.outfits[OutfitLune_Clea] = 1;
-		else if (name == "SkinMaelle_Clea") items.outfits[OutfitMaelle_Clea] = 1;
-		else if (name == "SkinSciel_Clea") items.outfits[OutfitSciel_Clea] = 1;
-		else if (name == "FaceLune_Default_WhiteVer") items.outfits[HaircutLune_RebelliousWhite] = 1;
-		else if (name == "FaceGustave_Default_WhiteVersion") items.outfits[HaircutGustave_ExpeditionWhite] = 1;
-		else if (name == "FaceSciel_Default_WhiteVersion") items.outfits[HaircutSciel_MessyBunWhite] = 1;
-		else if (name == "FaceVerso_Default_WhiteVersion") items.outfits[HaircutVerso_ExpeditionWhite] = 1;
-		else if (name == "FaceMaelle_Default_WhiteVersion") items.outfits[HaircutMaelle_PonytailWhite] = 1;
-		else if (name == "FaceMaelle_DoubleBraid_WhiteVersion") items.outfits[HaircutMaelle_DoubleBraidWhite] = 1;
-		else if (name == "FaceMaelle_Gestral_WhiteVersion") items.outfits[HaircutMaelle_GestralWhite] = 1;
-		else if (name == "FaceMaelle_Short_WhiteVersion") items.outfits[HaircutMaelle_ShortWhite] = 1;
-		else if (name == "FaceMaelle_Bald") items.outfits[HaircutMaelle_Bald] = 1;
-		else if (name == "FaceLune_Bald") items.outfits[HaircutLune_Bald] = 1;
-		else if (name == "FaceSciel_Bald") items.outfits[HaircutSciel_Bald] = 1;
-		else if (name == "FaceVerso_Bald") items.outfits[HaircutVerso_Bald] = 1;
-		else if (name == "FaceSciel_Clea") items.outfits[HaircutSciel_Clea] = 1;
-		else if (name == "FaceLune_Clea") items.outfits[HaircutLune_Clea] = 1;
-		else if (name == "FaceMaelle_Clea") items.outfits[HaircutMaelle_Clea] = 1;
-		else if (name == "FaceMaelle_Alicia") items.outfits[HaircutMaelle_PaintedMe] = 1;
-		else if (name == "SkinMaelle_CivilianSkirt") items.outfits[OutfitMaelle_Skirt] = 1;
-		else if (name == "SkinLune_CivilianSkirt") items.outfits[OutfitLune_Skirt] = 1;
-		else if (name == "SkinSciel_CivilianSkirt") items.outfits[OutfitSciel_Skirt] = 1;
-		else if (name == "FaceMonoco_Bald") items.outfits[HaircutMonoco_Bald] = 1;
-		// else if (name == "SkinGustave_RealRenoir") items.outfits[OutfitGustave_Renoir] = 1;
-		// else if (name == "SkinVerso_RealRenoir") items.outfits[OutfitVerso_Renoir] = 1;
-		else if (name == "SkinVerso_Simple") items.outfits[OutfitVerso_Simple] = 1;
-		// else if (name == "SkinGustave_Default_Red") items.outfits[OutfitGustave_CrimsonUniform] = 1;
-		else if (name == "SkinMaelle_Lumiere") items.outfits[OutfitMaelle_Lumiere] = 1;
-		else if (name == "SkinGustave_Civil") items.outfits[OutfitGustave_Civilian] = 1;
-		else if (name == "SkinVerso_Civil") items.outfits[OutfitVerso_Civilian] = 1;
-		// else if (name == "SkinSciel_Civil") items.outfits[OutfitSciel_Civilian] = 1;
-		// else if (name == "SkinLune_Civil") items.outfits[OutfitLune_Civilian] = 1;
-		else if (name == "SkinGustave_FlowerSuit") items.outfits[OutfitGustave_FlowerSuit] = 1;
-		else if (name == "SkinVerso_FlowerSuit") items.outfits[OutfitVerso_FlowerSuit] = 1;
-		else if (name == "SkinLune_FlowerSuit") items.outfits[OutfitLune_FlowerSuit] = 1;
-		else if (name == "SkinSciel_FlowerSuit") items.outfits[OutfitSciel_FlowerSuit] = 1;
-		else if (name == "SkinMaelle_FlowerSuit") items.outfits[OutfitMaelle_FlowerSuit] = 1;
-		else if (name == "SkinMonoco_FlowerSuit") items.outfits[OutfitMonoco_FlowerSuit] = 1;
-		else if (name == "SkinGustave_Obscur") items.outfits[OutfitGustave_Obscur] = 1;
-		else if (name == "SkinVerso_Obscur") items.outfits[OutfitVerso_Obscur] = 1;
-		else if (name == "SkinMaelle_Obscur") items.outfits[OutfitMaelle_Obscur] = 1;
-		else if (name == "SkinMaelle_Clair") items.outfits[OutfitMaelle_Clair] = 1;
-		else if (name == "SkinVerso_Clair") items.outfits[OutfitVerso_Clair] = 1;
-		else if (name == "FaceGustave_Flowers") items.outfits[HaircutGustave_Flowers] = 1;
-		else if (name == "FaceVerso_Flowers") items.outfits[HaircutVerso_Flowers] = 1;
-		else if (name == "FaceMaelle_Flowers") items.outfits[HaircutMaelle_Flowers] = 1;
-		else if (name == "FaceSciel_Flowers") items.outfits[HaircutSciel_Flowers] = 1;
-		else if (name == "FaceMonoco_Flowers") items.outfits[HaircutMonoco_Flowers] = 1;
-		else if (name == "FaceLune_Flowers") items.outfits[HaircutLune_Flowers] = 1;
-		else if (name == "SkinVerso_Baguette") items.outfits[OutfitVerso_Baguette] = 1;
-		else if (name == "SkinGustave_Baguette") items.outfits[OutfitGustave_Baguette] = 1;
-		else if (name == "SkinMaelle_Baguette") items.outfits[OutfitMaelle_Baguette] = 1;
-		else if (name == "SkinLune_Baguette") items.outfits[OutfitLune_Baguette] = 1;
-		else if (name == "SkinSciel_Baguette") items.outfits[OutfitSciel_Baguette] = 1;
-		else if (name == "FaceGustave_Baguette") items.outfits[HaircutGustave_Baguette] = 1;
-		else if (name == "FaceVerso_Baguette") items.outfits[HaircutVerso_Baguette] = 1;
-		else if (name == "FaceMaelle_Baguette") items.outfits[HaircutMaelle_Baguette] = 1;
-		else if (name == "FaceSciel_Baguette") items.outfits[HaircutSciel_Baguette] = 1;
-		else if (name == "FaceLune_Baguette") items.outfits[HaircutLune_Baguette] = 1;
-		else if (name == "SkinSciel_Chic") items.outfits[OutfitSciel_Chic] = 1;
-		else if (name == "SkinLune_Chic") items.outfits[OutfitLune_Chic] = 1;
-		else if (name == "SkinMaelle_Chic") items.outfits[OutfitMaelle_Chic] = 1;
-		else if (name == "SkinVerso_Chic") items.outfits[OutfitVerso_Chic] = 1;
-		else if (name == "SkinGustave_Chic") items.outfits[OutfitGustave_Chic] = 1;
-		else if (name == "SkinMonoco_Chic") items.outfits[OutfitMonoco_Chic] = 1;
-		else if (name == "FaceMaelle_Chic") items.outfits[HaircutMaelle_Chic] = 1;
-		else if (name == "FaceVerso_Chic") items.outfits[HaircutVerso_Chic] = 1;
-		else if (name == "FaceMonoco_Chic") items.outfits[HaircutMonoco_Chic] = 1;
-		else if (name == "FaceGustave_Chic") items.outfits[HaircutGustave_Chic] = 1;
-		else if (name == "FaceSciel_DoubleBun_Long") items.outfits[HaircutSciel_LongDoubleBun] = 1;
-		else if (name == "FaceSciel_DoubleBun") items.outfits[HaircutSciel_DoubleBun] = 1;
-		else if (name == "FaceLune_DoubleBun_Long") items.outfits[HaircutLune_LongDoubleBun] = 1;
-		else if (name == "FaceLune_DoubleBun") items.outfits[HaircutLune_DoubleBun] = 1;
-		else if (name == "FaceMaelle_DoubleBun_Long") items.outfits[HaircutMaelle_LongDoubleBun] = 1;
-		else if (name == "FaceMaelle_DoubleBun") items.outfits[HaircutMaelle_DoubleBun] = 1;
-		else if (name == "FaceVerso_BunBraid") items.outfits[HaircutVerso_BunBraid] = 1;
-		else if (name == "FaceGustave_BunBraid") items.outfits[HaircutGustave_BunBraid] = 1;
-		else if (name == "FaceMonoco_FrenchBob") items.outfits[HaircutMonoco_FrenchBob] = 1;
-		else if (name == "FaceMonoco_DoubleBun") items.outfits[HaircutMonoco_DoubleBun] = 1;
-		else if (name == "FaceLune_Simon") items.outfits[HaircutLune_Simon] = 1;
-		else if (name == "FaceSciel_Simon") items.outfits[HaircutSciel_Simon] = 1;
-		else if (name == "FaceMaelle_Simon") items.outfits[HaircutMaelle_Simon] = 1;
-		else if (name == "FaceVerso_Simon") items.outfits[HaircutVerso_Simon] = 1;
-		else if (name == "FaceMonoco_Simon") items.outfits[HaircutMonoco_Simon] = 1;
-		else if (name == "SkinLune_Esquie") items.outfits[OutfitLune_Esquie] = 1;
-		else if (name == "SkinSciel_Esquie") items.outfits[OutfitSciel_Esquie] = 1;
-		else if (name == "SkinGustave_Esquie") items.outfits[OutfitGustave_Esquie] = 1;
-		else if (name == "SkinVerso_Esquie") items.outfits[OutfitVerso_Esquie] = 1;
-		else if (name == "SkinMaelle_Esquie") items.outfits[OutfitMaelle_Esquie] = 1;
-		else if (name == "SkinMonoco_Esquie") items.outfits[OutfitMonoco_Esquie] = 1;
-		else if (name == "SkinLune_Osquio") items.outfits[OutfitLune_Osquio] = 1;
-		else if (name == "SkinSciel_Osquio") items.outfits[OutfitSciel_Osquio] = 1;
-		else if (name == "SkinGustave_Osquio") items.outfits[OutfitGustave_Osquio] = 1;
-		else if (name == "SkinVerso_Osquio") items.outfits[OutfitVerso_Osquio] = 1;
-		else if (name == "SkinMaelle_Osquio") items.outfits[OutfitMaelle_Osquio] = 1;
-		else if (name == "SkinMonoco_Osquio") items.outfits[OutfitMonoco_Osquio] = 1;
-		else if (name == "SkinMonoco_Baguette") items.outfits[OutfitMonoco_Baguette] = 1;
-		else if (name == "SkinVerso_MaskKeeper") items.outfits[OutfitVerso_Visages] = 1;
-		else if (name == "FaceLune_Esquie") items.outfits[HaircutLune_Esquie] = 1;
-		else if (name == "FaceSciel_Esquie") items.outfits[HaircutSciel_Esquie] = 1;
-		else if (name == "FaceGustave_Esquie") items.outfits[HaircutGustave_Esquie] = 1;
-		else if (name == "FaceVerso_Esquie") items.outfits[HaircutVerso_Esquie] = 1;
-		else if (name == "FaceMaelle_Esquie") items.outfits[HaircutMaelle_Esquie] = 1;
-		else if (name == "FaceMonoco_Esquie") items.outfits[HaircutMonoco_Esquie] = 1;
-		else if (name == "FaceLune_Osquio") items.outfits[HaircutLune_Osquio] = 1;
-		else if (name == "FaceSciel_Osquio") items.outfits[HaircutSciel_Osquio] = 1;
-		else if (name == "FaceGustave_Osquio") items.outfits[HaircutGustave_Osquio] = 1;
-		else if (name == "FaceVerso_Osquio") items.outfits[HaircutVerso_Osquio] = 1;
-		else if (name == "FaceMaelle_Osquio") items.outfits[HaircutMaelle_Osquio] = 1;
-		else if (name == "FaceMonoco_Osquio") items.outfits[HaircutMonoco_Osquio] = 1;
-		else if (name == "FaceVerso_Baguette") items.outfits[HaircutVerso_Baguette] = 1;
-		else if (name == "FaceMonoco_Baguette") items.outfits[HaircutMonoco_Baguette] = 1;
-		// else if (name == "FaceVerso_Renoir") items.outfits[HaircutVerso_Renoir] = 1;
-		else if (name == "SkinGustave_Gommage") items.outfits[OutfitGustave_Gommage] = 1;
-		else if (name == "SkinLune_Gommage") items.outfits[OutfitLune_Gommage] = 1;
-		else if (name == "SkinSciel_Gommage") items.outfits[OutfitSciel_Gommage] = 1;
-		else if (name == "SkinMaelle_Gommage") items.outfits[OutfitMaelle_Gommage] = 1;
-		else if (name == "SkinVerso_Gommage") items.outfits[OutfitVerso_Gommage] = 1;
-		else if (name == "SkinMonoco_Gommage") items.outfits[OutfitMonoco_Gommage] = 1;
-		else if (name == "SkinMonoco_Civilian") items.outfits[OutfitMonoco_Civilian] = 1;
-		else if (name == "SkinMaelle_CivilianLumiere") items.outfits[OutfitMaelle_Civilian] = 1;
+		if (outfits.find(name) != outfits.end())
+			items.outfits[outfits.at(name)] = 1;
 
-		// ============================= Journals =============================
-		else if (name == "Journal_Exp34") items.journals[Journal34] = 1;
-		else if (name == "Journal_Exp35") items.journals[Journal35] = 1;
-		else if (name == "Journal_Exp36") items.journals[Journal36] = 1;
-		else if (name == "Journal_Exp37") items.journals[Journal37] = 1;
-		else if (name == "Journal_Exp38") items.journals[Journal38] = 1;
-		else if (name == "Journal_Exp39") items.journals[Journal39] = 1;
-		else if (name == "Journal_Exp40") items.journals[Journal40] = 1;
-		else if (name == "Journal_Exp41") items.journals[Journal41] = 1;
-		else if (name == "Journal_Exp42") items.journals[Journal42] = 1;
-		else if (name == "Journal_Exp43") items.journals[Journal43] = 1;
-		else if (name == "Journal_Exp44") items.journals[Journal44] = 1;
-		else if (name == "Journal_Exp45") items.journals[Journal45] = 1;
-		else if (name == "Journal_Exp46") items.journals[Journal46] = 1;
-		else if (name == "Journal_Exp47") items.journals[Journal47] = 1;
-		else if (name == "Journal_Exp48") items.journals[Journal48] = 1;
-		else if (name == "Journal_Exp49") items.journals[Journal49] = 1;
-		else if (name == "Journal_Exp50") items.journals[Journal50] = 1;
-		else if (name == "Journal_Exp51") items.journals[Journal51] = 1;
-		else if (name == "Journal_Exp52") items.journals[Journal52] = 1;
-		else if (name == "Journal_Exp53") items.journals[Journal53] = 1;
-		else if (name == "Journal_Exp54") items.journals[Journal54] = 1;
-		else if (name == "Journal_Exp55") items.journals[Journal55] = 1;
-		else if (name == "Journal_Exp56") items.journals[Journal56] = 1;
-		else if (name == "Journal_Exp57") items.journals[Journal57] = 1;
-		else if (name == "Journal_Exp58") items.journals[Journal58] = 1;
-		else if (name == "Journal_Exp59") items.journals[Journal59] = 1;
-		else if (name == "Journal_Exp60") items.journals[Journal60] = 1;
-		else if (name == "Journal_Exp61") items.journals[Journal61] = 1;
-		else if (name == "Journal_Exp62") items.journals[Journal62] = 1;
-		else if (name == "Journal_Exp63") items.journals[Journal63] = 1;
-		else if (name == "Journal_Exp64") items.journals[Journal64] = 1;
-		else if (name == "Journal_Exp65") items.journals[Journal65] = 1;
-		else if (name == "Journal_Exp66") items.journals[Journal66] = 1;
-		else if (name == "Journal_Exp67") items.journals[Journal67] = 1;
-		else if (name == "Journal_Exp68") items.journals[Journal68] = 1;
-		else if (name == "Journal_Exp69") items.journals[Journal69] = 1;
-		else if (name == "Journal_Exp70") items.journals[Journal70] = 1;
-		else if (name == "Journal_Exp78") items.journals[Journal78] = 1;
-		else if (name == "Journal_Exp81") items.journals[Journal81] = 1;
-		else if (name == "Journal_Exp84") items.journals[Journal84] = 1;
-		else if (name == "Journal_Aline") items.journals[JournalAline] = 1;
-		else if (name == "Journal_Exp100B") items.journals[JournalJulie] = 1;
-		else if (name == "Journal_RenoirManor") items.journals[JournalRenoir] = 1;
-		else if (name == "Journal_Exp100A") items.journals[JournalSimon] = 1;
-		else if (name == "Journal_OldLumiere") items.journals[JournalSurvivor] = 1;
-		else if (name == "Journal_RenoirVisages") items.journals[JournalUnknown1] = 1;
-		else if (name == "Journal_RenoirReacher") items.journals[JournalUnknown2] = 1;
-		else if (name == "Journal_RenoirSirene") items.journals[JournalUnknown3] = 1;
-		else if (name == "Journal_Verso") items.journals[JournalVerso] = 1;
+		if (journals.find(name) != journals.end())
+			items.journals[journals.at(name)] = 1;
 	}
-
 }
