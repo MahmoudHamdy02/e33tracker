@@ -189,8 +189,8 @@ const std::array<Area, NUM_AREAS> AREAS = {
 		"Falling Leaves",
 		{Glaisum, Scaverim, Direton},
 		{SOSRush, BeneficialContamination},
-		{Journal35, Journal49},
 		{},
+		{Journal35, Journal49},
 	},
 	Area{
 		"Floating Cemetary",
@@ -286,9 +286,9 @@ const std::array<Area, NUM_AREAS> AREAS = {
 	Area{
 		"Sirene's Dress",
 		{Choralim, Ballaro},
+		{},
+		{},
 		{Journal46},
-		{},
-		{},
 	},
 	Area{
 		"Sky Island",
