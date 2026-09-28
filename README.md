@@ -1,6 +1,6 @@
 # Clair Obscur Area Item Tracker
 
-A simple script to track which areas have been completed
+A simple script to track which areas have been completed and print missing items in each area
 
 Tracked items:
 - Weapons
@@ -36,6 +36,11 @@ Spring Meadows: Yes
 Flying Waters: Yes
 Ancient Sanctuary: Yes
 Gestral Village: Yes
+...
+
+Print missing items in each area? (y/n)
+y
+Sky Island: Urnaro, GreaterSlow,
 ...
 ```
 
