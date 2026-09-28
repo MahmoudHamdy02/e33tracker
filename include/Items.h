@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <initializer_list>
 
-enum Weapon : uint32_t
+enum Weapon
 {
 	Abysseram,
 	Algueron,
@@ -125,7 +125,7 @@ enum Weapon : uint32_t
 	WeaponCount,
 };
 
-enum Picto : uint32_t
+enum Picto
 {
 	AcceleratingHeal,
 	AcceleratingLastStand,
@@ -340,7 +340,7 @@ enum Picto : uint32_t
 	PictoCount,
 };
 
-enum Outfit : uint32_t
+enum Outfit
 {
 	HaircutGustave_Baguette,
 	// HaircutGustave_Bun, // ng+
@@ -556,7 +556,7 @@ enum Outfit : uint32_t
 	OutfitCount,
 };
 
-enum Journal : uint32_t
+enum Journal
 {
 	Journal34,
 	Journal35,

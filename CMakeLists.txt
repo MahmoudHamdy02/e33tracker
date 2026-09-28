@@ -11,9 +11,19 @@ include(FetchContent)
 FetchContent_Declare(
     nlohmann_json
     URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
-FetchContent_MakeAvailable(nlohmann_json)
+FetchContent_Declare(
+    magic_enum
+    GIT_REPOSITORY https://github.com/Neargye/magic_enum.git
+    GIT_TAG v0.9.7
+)
+
+FetchContent_MakeAvailable(
+    nlohmann_json
+    magic_enum
+)
 
 add_executable(e33tracker
     src/main.cpp
@@ -29,5 +39,6 @@ target_include_directories(e33tracker
 target_link_libraries(e33tracker
     PRIVATE
         nlohmann_json::nlohmann_json
+        magic_enum::magic_enum
 )
 

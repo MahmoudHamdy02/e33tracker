@@ -1,3 +1,6 @@
+#define MAGIC_ENUM_RANGE_MIN 0
+#define MAGIC_ENUM_RANGE_MAX 512
+#include <magic_enum/magic_enum.hpp>
 #include <iostream>
 #include "Items.h"
 #include "Parser.h"
@@ -56,6 +59,35 @@ void _print_areas(const Items& items)
 	  std::cout << area.name << ": " << (_area_is_complete(items, area) ? "Yes" : "No") << std::endl;
 }
 
+void _print_missing_items(const Items& items)
+{
+	using namespace magic_enum;
+
+	std::cout << "Missing items:" << std::endl;
+
+	for (const auto& area: AREAS)
+	{
+		std::cout << area.name << ": ";
+		for (auto i: area.weapons)
+			if (items.weapons[i] == 0)
+				std::cout << enum_name(enum_value<Weapon>(i)) << ", ";
+
+		for (auto i: area.pictos)
+			if (items.pictos[i] == 0)
+				std::cout << enum_name(enum_value<Picto>(i)) << ", ";
+
+		for (auto i: area.outfits)
+			if (items.outfits[i] == 0)
+				std::cout << enum_name(enum_value<Outfit>(i)) << ", ";
+
+		for (auto i: area.journals)
+			if (items.journals[i] == 0)
+				std::cout << enum_name(enum_value<Journal>(i)) << ", ";
+
+		std::cout << std::endl;
+	}
+}
+
 int main(int argc, const char** argv)
 {
 	if (argc != 2)
@@ -72,6 +104,18 @@ int main(int argc, const char** argv)
 	_print_item_counts(items);
 	std::cout << std::endl;
 	_print_areas(items);
+	std::cout << std::endl;
+
+	std::cout << "Print missing items in each area? (y/n)" << std::endl;
+	char a;
+	std::cin >> a;
+	while (a != 'y' && a != 'n')
+	{
+		std::cout << "Please input y or n:" << std::endl;
+		std::cin >> a;
+	}
+	if (a == 'y')
+		_print_missing_items(items);
 
 	return 0;
 }
